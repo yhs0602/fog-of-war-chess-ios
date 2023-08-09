@@ -70,6 +70,10 @@ class Board: ObservableObject {
         squares[toRow][toColumn] = piece
         squares[fromRow][fromColumn] = nil
 
+        if let captureTarget = move.captureTarget { // en passant
+            squares[captureTarget.row][captureTarget.column] = nil
+        }
+
         moveHistory.append(move)
         return nil
     }

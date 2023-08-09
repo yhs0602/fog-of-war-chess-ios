@@ -45,7 +45,7 @@ extension Board {
                 )
             } else if piece.row > 0 {
                 appendIfNoPiece1(board: board, piece: piece, to: &result, candidate: Coord(column: piece.column
-                                                                             , row: piece.row - 1))
+                                                                                           , row: piece.row - 1))
 
             } else {
                 // should have promoted
@@ -91,25 +91,32 @@ extension Board {
     }
 
     func getPawnEnpassant(board: [ChessPiece], piece: ChessPiece, history: [Move], to result: inout [Move]) {
+        print("getPawnEnpassant")
         // history
         guard let lastMove = history.last else {
             return
         }
+        print("last move exists")
         if lastMove.piece.type != .pawn {
             return
         }
+        print("last is pawn")
         let distance = lastMove.to.row - lastMove.from.row
-        if distance != -2 || distance != 2 {
+        print("last distance is \(distance)")
+        if distance != -2 && distance != 2 {
             return
         }
-        if lastMove.to.column != piece.column - 1 || lastMove.to.column != piece.column + 1 {
+        print("last distance is \(distance)")
+        if lastMove.to.column != piece.column - 1 && lastMove.to.column != piece.column + 1 {
             return
         }
+        print("last column is \(lastMove.to.column)")
         if lastMove.to.row != piece.row {
             return
         }
+        print("last row is \(lastMove.to.row)")
         let newMove = Move(board: board, piece: piece, from: piece.pos
-                           , to: lastMove.to)
+                           , to: Coord(column: lastMove.to.column, row: lastMove.to.row - distance / 2), captureTarget: pieceAt(coord: lastMove.to))
         result.append(newMove)
     }
 }
