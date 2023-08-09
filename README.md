@@ -6,7 +6,7 @@
 - [x] Game ending
 - [x] Fog of war
 - [x] Sounds
-- [ ] Pgn export
+- [x] Pgn export
 - [x] Reset
 - [x] Castling
 - [ ] Replay
