@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import AVFoundation
 
 enum GamePhase: String {
     case playing, white_win, black_win
@@ -28,6 +29,8 @@ class ContentViewModel: ObservableObject {
     @Published var moveAt: [Coord: Move] = [:]
     @Published var promotingPawn: ChessPiece?
     @Published var isVisibleCoord: [Coord: Bool] = [:]
+    var dropAudioPlayer: AVAudioPlayer?
+    var placeAudioPlayer: AVAudioPlayer?
 
     init() {
         self.board = Board()
@@ -35,6 +38,28 @@ class ContentViewModel: ObservableObject {
         self.possibleMoves = []
         self.board.initializePieces()
         calculateVisibleCoords()
+        setupAudioPlayer()
+    }
+
+    func setupAudioPlayer() {
+        if let audioURL = Bundle.main.url(forResource: "drop", withExtension: "mp3") {
+            do {
+                dropAudioPlayer = try AVAudioPlayer(contentsOf: audioURL)
+            } catch {
+                print("Error loading audio: \(error)")
+            }
+        } else {
+            print("Cannot find audio")
+        }
+        if let audioURL = Bundle.main.url(forResource: "place", withExtension: "mp3") {
+            do {
+                placeAudioPlayer = try AVAudioPlayer(contentsOf: audioURL)
+            } catch {
+                print("Error loading audio: \(error)")
+            }
+        } else {
+            print("Cannot find audio 2")
+        }
     }
 
     func cellTapped(row: Int, column: Int) {
@@ -67,6 +92,12 @@ class ContentViewModel: ObservableObject {
 
     func movePiece(move: Move) {
         // TODO: play sound based on capture target
+        if move.captureTarget != nil {
+            dropAudioPlayer?.play()
+        } else {
+            placeAudioPlayer?.play()
+        }
+
         let winner = board.apply(move: move)
         possibleMoves = []
         switch winner {
