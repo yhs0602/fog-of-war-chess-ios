@@ -11,3 +11,6 @@
 - [x] Castling
 - [ ] Replay
 - [ ] AI
+
+![Fog of chess image](/screenshot.png "Screenshot")
+
