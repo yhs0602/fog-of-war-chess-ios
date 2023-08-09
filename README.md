@@ -1,13 +1,13 @@
 # fog-of-war-chess-ios
 
-- [ ] History
-- [ ] Pawn enpassant
+- [x] History
+- [x] Pawn enpassant
 - [ ] Pawn promotion
-- [ ] Game ending
+- [x] Game ending
 - [ ] Fog of war
 - [ ] Sounds
 - [ ] Pgn export
 - [ ] Reset
-- [ ] Castling
+- [x] Castling
 - [ ] Replay
 - [ ] AI
