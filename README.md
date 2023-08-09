@@ -11,6 +11,7 @@
 - [x] Castling
 - [ ] Replay
 - [ ] AI
+- [ ] Fix history bug: bothersome
 
 ![Fog of chess image](/screenshot.png "Screenshot")
 
