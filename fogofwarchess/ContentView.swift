@@ -71,7 +71,14 @@ struct ContentView: View {
                 }.border(.black)
                 Text("Current turn: \(viewModel.currentColor.rawValue)")
                 Text("Selected Piece: \(viewModel.selectedPiece?.description ?? "None")")
-                Text("History: \(viewModel.historyPgn)")
+                if viewModel.gamePhase != .playing {
+                    Text("History: \(viewModel.historyPgn)")
+                    Button("Copy PGN") {
+                        let pgn = viewModel.historyPgn
+                        let pasteboard = UIPasteboard.general
+                        pasteboard.string = pgn
+                    }
+                }
                 Text("Game phase: \(viewModel.gamePhase.rawValue)")
                 Button("Reset") {
                     viewModel.reset()

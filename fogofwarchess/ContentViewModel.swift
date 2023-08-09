@@ -145,9 +145,43 @@ class ContentViewModel: ObservableObject {
     }
 
     var historyPgn: String {
-        return board.moveHistory.map { move in
-            move.getPgn(board: board)
+        let history = board.moveHistory
+        var foldedHistory: [Move] = []
+        var shouldSkip = false
+
+        for i in history.indices {
+            if shouldSkip {
+                shouldSkip = false
+                continue
+            }
+
+            let move = history[i]
+
+            if move.promotingTo == .pawn, i + 1 < history.count {
+                let promotingMove = history[i + 1]
+                let newMove = Move(
+                    board: move.board,
+                    piece: move.piece,
+                    from: move.from,
+                    to: move.to,
+                    promotingTo: promotingMove.promotingTo
+                )
+                foldedHistory.append(newMove)
+                shouldSkip = true
+            } else {
+                foldedHistory.append(move)
+            }
+        }
+
+        let historyString = foldedHistory.enumerated().map { (index, move) -> String in
+            let prefix = move.piece.color == .black ? "..." : "."
+            if index % 2 == 0 {
+                return "\(index / 2 + 1)\(prefix)\(move.getPgn(board: board))"
+            } else {
+                return prefix + move.getPgn(board: board)
+            }
         }.joined(separator: " ")
+        return historyString
     }
 
     func promote(pieceType: ChessPieceType) {
