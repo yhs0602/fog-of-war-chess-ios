@@ -19,6 +19,7 @@
 		46C280682A8233CE00CE1DF5 /* Coord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C280672A8233CE00CE1DF5 /* Coord.swift */; };
 		46C2806A2A82391B00CE1DF5 /* Board+Pawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C280692A82391B00CE1DF5 /* Board+Pawn.swift */; };
 		46C2806C2A83264200CE1DF5 /* ChessColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C2806B2A83264200CE1DF5 /* ChessColor.swift */; };
+		46C2806E2A83348A00CE1DF5 /* Move+Pgn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C2806D2A83348A00CE1DF5 /* Move+Pgn.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		46C280672A8233CE00CE1DF5 /* Coord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coord.swift; sourceTree = "<group>"; };
 		46C280692A82391B00CE1DF5 /* Board+Pawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Board+Pawn.swift"; sourceTree = "<group>"; };
 		46C2806B2A83264200CE1DF5 /* ChessColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessColor.swift; sourceTree = "<group>"; };
+		46C2806D2A83348A00CE1DF5 /* Move+Pgn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Move+Pgn.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 				46C280632A82278900CE1DF5 /* Move.swift */,
 				46C280672A8233CE00CE1DF5 /* Coord.swift */,
 				46C2806B2A83264200CE1DF5 /* ChessColor.swift */,
+				46C2806D2A83348A00CE1DF5 /* Move+Pgn.swift */,
 			);
 			path = fogofwarchess;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 				46C280522A82185000CE1DF5 /* ContentView.swift in Sources */,
 				46C280622A8226E300CE1DF5 /* Board.swift in Sources */,
 				46C280662A8227E400CE1DF5 /* ContentViewModel.swift in Sources */,
+				46C2806E2A83348A00CE1DF5 /* Move+Pgn.swift in Sources */,
 				46C2806A2A82391B00CE1DF5 /* Board+Pawn.swift in Sources */,
 				46C280502A82185000CE1DF5 /* fogofwarchessApp.swift in Sources */,
 				46C280682A8233CE00CE1DF5 /* Coord.swift in Sources */,

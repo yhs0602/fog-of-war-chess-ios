@@ -11,11 +11,18 @@ class Move {
     let piece: ChessPiece
     let from: Coord
     let to: Coord
-    let captureTarget: ChessPiece? = nil
+    let castlingRook: ChessPiece?
+    let promotingTo: ChessPieceType?
+    let captureTarget: ChessPiece?
+    let board: [ChessPiece]
 
-    init(piece: ChessPiece, from: Coord, to: Coord, captureTarget: ChessPiece? = nil) {
+    init(board: [ChessPiece], piece: ChessPiece, from: Coord, to: Coord, captureTarget: ChessPiece? = nil, castlingRook: ChessPiece? = nil, promotingTo: ChessPieceType? = nil) {
+        self.board = board
         self.piece = piece
         self.from = from
         self.to = to
+        self.castlingRook = castlingRook
+        self.promotingTo = promotingTo
+        self.captureTarget = captureTarget
     }
 }

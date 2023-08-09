@@ -12,9 +12,16 @@ struct Coord: Hashable {
     let row: Int
 
     var coordCode: String {
-        let letter = Character(UnicodeScalar("a".utf16.first! + UInt16(column))!)
+        return "\(coordLetter)\(coordNumber)"
+    }
+
+    var coordLetter: Character {
+        return Character(UnicodeScalar("a".utf16.first! + UInt16(column))!)
+    }
+
+    var coordNumber: Character {
         let number = 8 - row
-        return "\(letter)\(number)"
+        return Character(String(number))
     }
 
     init(column: Int, row: Int) {

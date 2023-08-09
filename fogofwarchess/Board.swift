@@ -75,26 +75,26 @@ class Board: ObservableObject {
     }
 
     // returns to continue
-    func captureOrMove(piece: ChessPiece, targetCoord: Coord, to result: inout [Move]) -> Bool {
+    func captureOrMove(board: [ChessPiece], piece: ChessPiece, targetCoord: Coord, to result: inout [Move]) -> Bool {
         guard let targetPiece = pieceAt(coord: targetCoord) else {
-            result.append(Move(piece: piece, from: piece.pos, to: targetCoord))
+            result.append(Move(board: board, piece: piece, from: piece.pos, to: targetCoord))
             return true
         }
 
         if targetPiece.color != piece.color {
-            result.append(Move(piece: piece, from: piece.pos, to: targetCoord, captureTarget: targetPiece))
+            result.append(Move(board: board, piece: piece, from: piece.pos, to: targetCoord, captureTarget: targetPiece))
         }
         return false
     }
 
-    func getRookPossibleMoves(piece: ChessPiece) -> [Move] {
+    func getRookPossibleMoves(board: [ChessPiece], piece: ChessPiece) -> [Move] {
         var result = [Move]()
 
         // Extend to 4 directions
         if piece.column < 7 {
             for i in (piece.column + 1)...7 {
                 let targetCoord = Coord(column: i, row: piece.row)
-                if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
+                if captureOrMove(board: board, piece: piece, targetCoord: targetCoord, to: &result) {
                     continue
                 } else {
                     break
@@ -105,7 +105,7 @@ class Board: ObservableObject {
         if piece.column > 0 {
             for i in stride(from: piece.column - 1, through: 0, by: -1) {
                 let targetCoord = Coord(column: i, row: piece.row)
-                if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
+                if captureOrMove(board: board, piece: piece, targetCoord: targetCoord, to: &result) {
                     continue
                 } else {
                     break
@@ -116,7 +116,7 @@ class Board: ObservableObject {
         if piece.row < 7 {
             for i in (piece.row + 1)...7 {
                 let targetCoord = Coord(column: piece.column, row: i)
-                if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
+                if captureOrMove(board: board, piece: piece, targetCoord: targetCoord, to: &result) {
                     continue
                 } else {
                     break
@@ -127,7 +127,7 @@ class Board: ObservableObject {
         if piece.row > 0 {
             for i in stride(from: piece.row - 1, through: 0, by: -1) {
                 let targetCoord = Coord(column: piece.column, row: i)
-                if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
+                if captureOrMove(board: board, piece: piece, targetCoord: targetCoord, to: &result) {
                     continue
                 } else {
                     break
@@ -137,7 +137,7 @@ class Board: ObservableObject {
         return result
     }
 
-    func getBishopPossibleMoves(piece: ChessPiece) -> [Move] {
+    func getBishopPossibleMoves(board: [ChessPiece], piece: ChessPiece) -> [Move] {
         var result = [Move]()
 
         // Extend to 4 diagonals
@@ -146,7 +146,7 @@ class Board: ObservableObject {
             if !targetCoord.isValid() {
                 break
             }
-            if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
+            if captureOrMove(board: board, piece: piece, targetCoord: targetCoord, to: &result) {
                 continue
             } else {
                 break
@@ -158,7 +158,7 @@ class Board: ObservableObject {
             if !targetCoord.isValid() {
                 break
             }
-            if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
+            if captureOrMove(board: board, piece: piece, targetCoord: targetCoord, to: &result) {
                 continue
             } else {
                 break
@@ -170,7 +170,7 @@ class Board: ObservableObject {
             if !targetCoord.isValid() {
                 break
             }
-            if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
+            if captureOrMove(board: board, piece: piece, targetCoord: targetCoord, to: &result) {
                 continue
             } else {
                 break
@@ -182,7 +182,7 @@ class Board: ObservableObject {
             if !targetCoord.isValid() {
                 break
             }
-            if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
+            if captureOrMove(board: board, piece: piece, targetCoord: targetCoord, to: &result) {
                 continue
             } else {
                 break
@@ -192,7 +192,7 @@ class Board: ObservableObject {
         return result
     }
 
-    func getKnightPossibleMoves(piece: ChessPiece) -> [Move] {
+    func getKnightPossibleMoves(board: [ChessPiece], piece: ChessPiece) -> [Move] {
         var result = [Move]()
 
         let possibleMoves: [(Int, Int)] = [
@@ -205,10 +205,10 @@ class Board: ObservableObject {
             if targetCoord.isValid() {
                 if let targetPiece = pieceAt(coord: targetCoord) {
                     if targetPiece.color != piece.color {
-                        result.append(Move(piece: piece, from: piece.pos, to: targetCoord, captureTarget: targetPiece))
+                        result.append(Move(board: board, piece: piece, from: piece.pos, to: targetCoord, captureTarget: targetPiece))
                     }
                 } else {
-                    result.append(Move(piece: piece, from: piece.pos, to: targetCoord))
+                    result.append(Move(board: board, piece: piece, from: piece.pos, to: targetCoord))
                 }
             }
         }
@@ -216,13 +216,13 @@ class Board: ObservableObject {
         return result
     }
 
-    func getQueenPossibleMoves(piece: ChessPiece) -> [Move] {
-        let r = getRookPossibleMoves(piece: piece)
-        let b = getBishopPossibleMoves(piece: piece)
+    func getQueenPossibleMoves(board: [ChessPiece], piece: ChessPiece) -> [Move] {
+        let r = getRookPossibleMoves(board: board, piece: piece)
+        let b = getBishopPossibleMoves(board: board, piece: piece)
         return r + b
     }
 
-    func getKingPossibleMoves(piece: ChessPiece) -> [Move] {
+    func getKingPossibleMoves(board: [ChessPiece], piece: ChessPiece) -> [Move] {
         var result = [Move]()
 
         let possibleMoves: [(Int, Int)] = [
@@ -235,10 +235,10 @@ class Board: ObservableObject {
             if targetCoord.isValid() {
                 if let targetPiece = pieceAt(coord: targetCoord) {
                     if targetPiece.color != piece.color {
-                        result.append(Move(piece: piece, from: piece.pos, to: targetCoord, captureTarget: targetPiece))
+                        result.append(Move(board: board, piece: piece, from: piece.pos, to: targetCoord, captureTarget: targetPiece))
                     }
                 } else {
-                    result.append(Move(piece: piece, from: piece.pos, to: targetCoord))
+                    result.append(Move(board: board, piece: piece, from: piece.pos, to: targetCoord))
                 }
             }
         }
@@ -247,17 +247,18 @@ class Board: ObservableObject {
     }
 
     func getPossibleMovesWithoutPawn(piece: ChessPiece) -> [Move] {
+        let board = toSnapshot()
         switch piece.type {
         case .rook:
-            return getRookPossibleMoves(piece: piece)
+            return getRookPossibleMoves(board: board, piece: piece)
         case .knight:
-            return getKnightPossibleMoves(piece: piece)
+            return getKnightPossibleMoves(board: board, piece: piece)
         case .bishop:
-            return getBishopPossibleMoves(piece: piece)
+            return getBishopPossibleMoves(board: board, piece: piece)
         case .queen:
-            return getQueenPossibleMoves(piece: piece)
+            return getQueenPossibleMoves(board: board, piece: piece)
         case .king:
-            return getKingPossibleMoves(piece: piece)
+            return getKingPossibleMoves(board: board, piece: piece)
         default: // error: Pawn should not be called
             return []
         }
@@ -271,5 +272,20 @@ class Board: ObservableObject {
             return false
         }
         return targetPiece.color != piece.color
+    }
+
+    func toSnapshot() -> [ChessPiece] {
+        var result: [ChessPiece] = []
+        for row in squares {
+            for square in row {
+                if let piece = square {
+                    result.append(
+                        ChessPiece(type: piece.type
+                                   , color: piece.color, pos: piece.pos)
+                    )
+                }
+            }
+        }
+        return result
     }
 }
