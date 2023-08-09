@@ -31,6 +31,28 @@ enum ChessPieceType: String {
         case .king: return 1000
         }
     }
+
+    var darkResource: String {
+        switch self {
+        case .pawn: return "pdt"
+        case .rook: return "rdt"
+        case .knight: return "ndt"
+        case .bishop: return "bdt"
+        case .queen: return "qdt"
+        case .king: return "kdt"
+        }
+    }
+
+    var lightResource: String {
+        switch self {
+        case .pawn: return "plt"
+        case .rook: return "rlt"
+        case .knight: return "nlt"
+        case .bishop: return "blt"
+        case .queen: return "qlt"
+        case .king: return "klt"
+        }
+    }
 }
 
 class ChessPiece: CustomStringConvertible {
@@ -43,6 +65,14 @@ class ChessPiece: CustomStringConvertible {
     }
     var column: Int {
         return pos.column
+    }
+
+    var image: String {
+        if color == .black {
+            return type.darkResource
+        } else {
+            return type.lightResource
+        }
     }
 
     init(type: ChessPieceType, color: ChessColor, pos: Coord) {

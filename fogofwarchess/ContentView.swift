@@ -25,7 +25,10 @@ struct CellView: View {
                 .foregroundColor((row + column) % 2 == 0 ? .ivory : .teal)
 
             if let piece {
-                Text(piece.type.rawValue)
+                Image(piece.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+//                Text(piece.type.rawValue)
             }
             if move != nil {
                 Text("x")
