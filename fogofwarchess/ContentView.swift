@@ -7,15 +7,57 @@
 
 import SwiftUI
 
-struct ContentView: View {
+extension Color {
+    static let ivory = Color(red: 255 / 255, green: 255 / 255, blue: 240 / 255)
+}
+
+struct CellView: View {
+    let squareSize: CGFloat
+    let row: Int
+    let column: Int
+    let cellTapped: (Int, Int) -> Void
+    let pieceAt: (Int, Int) -> ChessPiece?
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        ZStack {
+            Rectangle()
+                .frame(width: squareSize, height: squareSize)
+                .foregroundColor((row + column) % 2 == 0 ? .ivory : .teal)
+                .onTapGesture {
+                    cellTapped(row, column)
+
+            }
+            if let piece = pieceAt(row, column) {
+                Text(piece.type.rawValue)
+            }
         }
-        .padding()
+    }
+}
+
+struct ContentView: View {
+    @StateObject private var viewModel = ContentViewModel()
+
+    var chessBoard: some View {
+        GeometryReader { geometry in
+            let squareSize = min(geometry.size.width, geometry.size.height) / 9
+            HStack(spacing: 0) {
+                ForEach(0..<8) { i in
+                    VStack(spacing: 0) {
+                        ForEach(0..<8) { j in
+                            CellView(
+                                squareSize: squareSize,
+                                row: j,
+                                column: i,
+                                cellTapped: viewModel.cellTapped,
+                                pieceAt: viewModel.pieceAt
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+    var body: some View {
+        chessBoard
     }
 }
 
