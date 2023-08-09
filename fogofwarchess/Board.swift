@@ -66,15 +66,20 @@ class Board: ObservableObject {
         let toRow = move.to.row
         let toColumn = move.to.column
 
-        piece.pos = move.to
-        squares[toRow][toColumn] = piece
-        squares[fromRow][fromColumn] = nil
-
         if let captureTarget = move.captureTarget { // en passant
             squares[captureTarget.row][captureTarget.column] = nil
         }
 
+        piece.pos = move.to
+        squares[toRow][toColumn] = piece
+        squares[fromRow][fromColumn] = nil
+
         moveHistory.append(move)
+        if let captureTarget = move.captureTarget {
+            if captureTarget.type == .king {
+                return move.piece.color // game end
+            }
+        }
         return nil
     }
 
