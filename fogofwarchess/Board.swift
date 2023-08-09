@@ -68,20 +68,29 @@ class Board: ObservableObject {
 
         if let captureTarget = move.captureTarget { // en passant
             removePieceAt(row: captureTarget.row, column: captureTarget.column)
+        }
+        if let promotingTo = move.promotingTo, promotingTo != .pawn {
+            place(
+                piece: ChessPiece(
+                    type: promotingTo,
+                    color: move.piece.color,
+                    pos: move.to
+                ), row: move.to.row, column: move.to.column
+            )
         } else if let castlingRook = move.castlingRook {
             place(piece: piece, row: toRow, column: toColumn) // king move
             removePieceAt(row: castlingRook.row, column: castlingRook.column)
             if fromColumn > toColumn { // left rook
-                place(piece: castlingRook, row: fromRow, column: fromColumn-1)
+                place(piece: castlingRook, row: fromRow, column: fromColumn - 1)
             } else { // right rook
                 place(piece: castlingRook, row: fromRow, column: fromColumn + 1)
             }
+        } else {
+            removePieceAt(row: fromRow, column: fromColumn)
+            place(piece: piece, row: toRow, column: toColumn)
         }
-
         piece.pos = move.to
         piece.moved = true
-        place(piece: piece, row: toRow, column: toColumn)
-        removePieceAt(row: fromRow, column: fromColumn)
 
         moveHistory.append(move)
         if let captureTarget = move.captureTarget {

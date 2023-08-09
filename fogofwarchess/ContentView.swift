@@ -44,32 +44,49 @@ struct ContentView: View {
     @StateObject private var viewModel = ContentViewModel()
 
     var chessBoard: some View {
-        VStack(alignment: .center) {
-            GeometryReader { geometry in
-                VStack {
-                    let squareSize = min(geometry.size.width, geometry.size.height) / 8
-                    HStack(spacing: 0) {
-                        ForEach(0..<8) { i in
-                            VStack(spacing: 0) {
-                                ForEach(0..<8) { j in
-                                    CellView(
-                                        squareSize: squareSize,
-                                        row: j,
-                                        column: i,
-                                        cellTapped: viewModel.cellTapped,
-                                        piece: viewModel.pieceAt(row: j, column: i),
-                                        move: viewModel.moveAt(row: j, column: i)
-                                    )
-                                }
+        GeometryReader { geometry in
+            VStack {
+                let squareSize = min(geometry.size.width, geometry.size.height) / 8
+                HStack(spacing: 0) {
+                    ForEach(0..<8) { i in
+                        VStack(spacing: 0) {
+                            ForEach(0..<8) { j in
+                                CellView(
+                                    squareSize: squareSize,
+                                    row: j,
+                                    column: i,
+                                    cellTapped: viewModel.cellTapped,
+                                    piece: viewModel.pieceAt(row: j, column: i),
+                                    move: viewModel.moveAt(row: j, column: i)
+                                )
                             }
                         }
                     }
-                    Text("Current turn: \(viewModel.currentColor.rawValue)")
-                    Text("Selected Piece: \(viewModel.selectedPiece?.description ?? "None")")
-                    Text("History: \(viewModel.historyPgn)")
-                    Text("Game phase: \(viewModel.gamePhase.rawValue)")
-                }
-            }.border(.black)
+                }.border(.black)
+                Text("Current turn: \(viewModel.currentColor.rawValue)")
+                Text("Selected Piece: \(viewModel.selectedPiece?.description ?? "None")")
+                Text("History: \(viewModel.historyPgn)")
+                Text("Game phase: \(viewModel.gamePhase.rawValue)")
+            }
+        }.border(.black)
+            .confirmationDialog("Select a color", isPresented: Binding<Bool>(
+            get: { viewModel.promotingPawn != nil },
+            set: { _ in viewModel.promotingPawn = nil }
+        ), titleVisibility: .visible) {
+            Button("Queen") {
+                viewModel.promote(pieceType: .queen)
+            }
+
+            Button("Rook") {
+                viewModel.promote(pieceType: .rook)
+            }
+
+            Button("Bishop") {
+                viewModel.promote(pieceType: .bishop)
+            }
+            Button("Knight") {
+                viewModel.promote(pieceType: .knight)
+            }
         }
     }
     var body: some View {

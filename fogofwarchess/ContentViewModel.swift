@@ -26,6 +26,7 @@ class ContentViewModel: ObservableObject {
     @Published var currentColor: ChessColor = .white
     @Published var gamePhase: GamePhase = .playing
     @Published var moveAt: [Coord: Move?] = [:]
+    @Published var promotingPawn: ChessPiece?
 
     init() {
         self.board = Board()
@@ -68,7 +69,10 @@ class ContentViewModel: ObservableObject {
         possibleMoves = []
         switch winner {
         case nil:
-            // TODO: handle promotion
+            if move.promotingTo != nil {
+                promotingPawn = move.piece
+                return
+            }
             selectedPiece = nil
             swapTurn()
         case .black:
@@ -110,5 +114,32 @@ class ContentViewModel: ObservableObject {
         return board.moveHistory.map { move in
             move.getPgn(board: board)
         }.joined(separator: " ")
+    }
+
+    func promote(pieceType: ChessPieceType) {
+        guard let promotingPawn else {
+            return
+        }
+        let winner = board.apply(
+            move: Move(
+                board: board.toSnapshot(),
+                piece: promotingPawn,
+                from: promotingPawn.pos,
+                to: promotingPawn.pos,
+                promotingTo: pieceType
+            )
+        )
+        self.promotingPawn = nil
+        selectedPiece = nil
+        swapTurn()
+        possibleMoves = []
+        switch winner {
+        case nil:
+            break
+        case .black:
+            gamePhase = .black_win
+        case .white:
+            gamePhase = .white_win
+        }
     }
 }

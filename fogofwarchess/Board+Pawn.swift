@@ -31,7 +31,13 @@ extension Board {
         }
 
         if pieceAt(coord: candidate) == nil {
-            let newMove = Move(board: board, piece: piece, from: piece.pos, to: candidate)
+            let promotingTo: ChessPieceType?
+            if candidate.row == 0 || candidate.row == 7 {
+                promotingTo = .pawn
+            } else {
+                promotingTo = nil
+            }
+            let newMove = Move(board: board, piece: piece, from: piece.pos, to: candidate, promotingTo: promotingTo)
             result.append(newMove)
         }
     }
@@ -68,13 +74,20 @@ extension Board {
 
     func addMoveIfCanCapture(board: [ChessPiece], piece: ChessPiece, candidate: Coord, to result: inout [Move]) {
         if canCapture(piece: piece, target: candidate) {
+            let promotingTo: ChessPieceType?
+            if candidate.row == 0 || candidate.row == 7 {
+                promotingTo = .pawn
+            } else {
+                promotingTo = nil
+            }
             result.append(
                 Move(
                     board: board,
                     piece: piece,
                     from: piece.pos,
                     to: candidate,
-                    captureTarget: pieceAt(coord: candidate)
+                    captureTarget: pieceAt(coord: candidate),
+                    promotingTo: promotingTo
                 )
             )
         }
