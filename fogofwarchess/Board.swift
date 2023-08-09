@@ -11,7 +11,7 @@ class Board: ObservableObject {
     @Published var squares: [[ChessPiece?]] = Array(repeating: Array(repeating: nil, count: 8), count: 8)
     var moveHistory: [Move] = []
 
-    func place(piece: ChessPiece, at row: Int, column: Int) {
+    func place(piece: ChessPiece, row: Int, column: Int) {
         squares[row][column] = piece
         piece.pos = Coord(column: column, row: row)
     }
@@ -30,31 +30,31 @@ class Board: ObservableObject {
 
     func initializePieces() {
         // Place black pieces
-        place(piece: ChessPiece(type: .rook, color: .black, pos: Coord(column: 0, row: 0)), at: 0, column: 0)
-        place(piece: ChessPiece(type: .knight, color: .black, pos: Coord(column: 1, row: 0)), at: 0, column: 1)
-        place(piece: ChessPiece(type: .bishop, color: .black, pos: Coord(column: 2, row: 0)), at: 0, column: 2)
-        place(piece: ChessPiece(type: .queen, color: .black, pos: Coord(column: 3, row: 0)), at: 0, column: 3)
-        place(piece: ChessPiece(type: .king, color: .black, pos: Coord(column: 4, row: 0)), at: 0, column: 4)
-        place(piece: ChessPiece(type: .bishop, color: .black, pos: Coord(column: 5, row: 0)), at: 0, column: 5)
-        place(piece: ChessPiece(type: .knight, color: .black, pos: Coord(column: 6, row: 0)), at: 0, column: 6)
-        place(piece: ChessPiece(type: .rook, color: .black, pos: Coord(column: 7, row: 0)), at: 0, column: 7)
+        place(piece: ChessPiece(type: .rook, color: .black, pos: Coord(column: 0, row: 0)), row: 0, column: 0)
+        place(piece: ChessPiece(type: .knight, color: .black, pos: Coord(column: 1, row: 0)), row: 0, column: 1)
+        place(piece: ChessPiece(type: .bishop, color: .black, pos: Coord(column: 2, row: 0)), row: 0, column: 2)
+        place(piece: ChessPiece(type: .queen, color: .black, pos: Coord(column: 3, row: 0)), row: 0, column: 3)
+        place(piece: ChessPiece(type: .king, color: .black, pos: Coord(column: 4, row: 0)), row: 0, column: 4)
+        place(piece: ChessPiece(type: .bishop, color: .black, pos: Coord(column: 5, row: 0)), row: 0, column: 5)
+        place(piece: ChessPiece(type: .knight, color: .black, pos: Coord(column: 6, row: 0)), row: 0, column: 6)
+        place(piece: ChessPiece(type: .rook, color: .black, pos: Coord(column: 7, row: 0)), row: 0, column: 7)
 
         for column in 0..<8 {
-            place(piece: ChessPiece(type: .pawn, color: .black, pos: Coord(column: column, row: 1)), at: 1, column: column)
+            place(piece: ChessPiece(type: .pawn, color: .black, pos: Coord(column: column, row: 1)), row: 1, column: column)
         }
 
         // Place white pieces
-        place(piece: ChessPiece(type: .rook, color: .white, pos: Coord(column: 0, row: 7)), at: 7, column: 0)
-        place(piece: ChessPiece(type: .knight, color: .white, pos: Coord(column: 1, row: 7)), at: 7, column: 1)
-        place(piece: ChessPiece(type: .bishop, color: .white, pos: Coord(column: 2, row: 7)), at: 7, column: 2)
-        place(piece: ChessPiece(type: .queen, color: .white, pos: Coord(column: 3, row: 7)), at: 7, column: 3)
-        place(piece: ChessPiece(type: .king, color: .white, pos: Coord(column: 4, row: 7)), at: 7, column: 4)
-        place(piece: ChessPiece(type: .bishop, color: .white, pos: Coord(column: 5, row: 7)), at: 7, column: 5)
-        place(piece: ChessPiece(type: .knight, color: .white, pos: Coord(column: 6, row: 7)), at: 7, column: 6)
-        place(piece: ChessPiece(type: .rook, color: .white, pos: Coord(column: 7, row: 7)), at: 7, column: 7)
+        place(piece: ChessPiece(type: .rook, color: .white, pos: Coord(column: 0, row: 7)), row: 7, column: 0)
+        place(piece: ChessPiece(type: .knight, color: .white, pos: Coord(column: 1, row: 7)), row: 7, column: 1)
+        place(piece: ChessPiece(type: .bishop, color: .white, pos: Coord(column: 2, row: 7)), row: 7, column: 2)
+        place(piece: ChessPiece(type: .queen, color: .white, pos: Coord(column: 3, row: 7)), row: 7, column: 3)
+        place(piece: ChessPiece(type: .king, color: .white, pos: Coord(column: 4, row: 7)), row: 7, column: 4)
+        place(piece: ChessPiece(type: .bishop, color: .white, pos: Coord(column: 5, row: 7)), row: 7, column: 5)
+        place(piece: ChessPiece(type: .knight, color: .white, pos: Coord(column: 6, row: 7)), row: 7, column: 6)
+        place(piece: ChessPiece(type: .rook, color: .white, pos: Coord(column: 7, row: 7)), row: 7, column: 7)
 
         for column in 0..<8 {
-            place(piece: ChessPiece(type: .pawn, color: .white, pos: Coord(column: column, row: 6)), at: 6, column: column)
+            place(piece: ChessPiece(type: .pawn, color: .white, pos: Coord(column: column, row: 6)), row: 6, column: column)
         }
     }
 
@@ -67,15 +67,21 @@ class Board: ObservableObject {
         let toColumn = move.to.column
 
         if let captureTarget = move.captureTarget { // en passant
-            squares[captureTarget.row][captureTarget.column] = nil
+            removePieceAt(row: captureTarget.row, column: captureTarget.column)
         } else if let castlingRook = move.castlingRook {
-
+            place(piece: piece, row: toRow, column: toColumn) // king move
+            removePieceAt(row: castlingRook.row, column: castlingRook.column)
+            if fromColumn > toColumn { // left rook
+                place(piece: castlingRook, row: fromRow, column: fromColumn-1)
+            } else { // right rook
+                place(piece: castlingRook, row: fromRow, column: fromColumn + 1)
+            }
         }
 
         piece.pos = move.to
         piece.moved = true
-        squares[toRow][toColumn] = piece
-        squares[fromRow][fromColumn] = nil
+        place(piece: piece, row: toRow, column: toColumn)
+        removePieceAt(row: fromRow, column: fromColumn)
 
         moveHistory.append(move)
         if let captureTarget = move.captureTarget {
@@ -282,7 +288,7 @@ class Board: ObservableObject {
                 }
             }
             // right rook
-            if let rightRook = pieceAt(coord: Coord(column: 0, row: piece.row)) {
+            if let rightRook = pieceAt(coord: Coord(column: 7, row: piece.row)) {
                 print("Right  rook check: \(piece.moved) \(rightRook.moved)")
                 if rightRook.type == .rook && rightRook.moved == false {
                     var canCastle = true
