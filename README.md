@@ -5,7 +5,7 @@
 - [x] Pawn promotion
 - [x] Game ending
 - [x] Fog of war
-- [ ] Sounds
+- [x] Sounds
 - [ ] Pgn export
 - [x] Reset
 - [x] Castling
