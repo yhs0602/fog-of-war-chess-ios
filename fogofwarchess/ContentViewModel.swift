@@ -105,4 +105,10 @@ class ContentViewModel: ObservableObject {
     func moveAt(row: Int, column: Int) -> Move? {
         return moveAt[Coord(column: column, row: row)] ?? nil
     }
+
+    var historyPgn: String {
+        return board.moveHistory.map { move in
+            move.getPgn(board: board)
+        }.joined(separator: " ")
+    }
 }

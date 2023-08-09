@@ -28,7 +28,6 @@ struct CellView: View {
                 Image(piece.image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-//                Text(piece.type.rawValue)
             }
             if move != nil {
                 Text("x")
@@ -64,7 +63,8 @@ struct ContentView: View {
                 }
             }
             Text("Current turn: \(viewModel.currentColor.rawValue)")
-            Text("Selected Piece: \(viewModel.selectedPiece?.description ?? "halal")")
+            Text("Selected Piece: \(viewModel.selectedPiece?.description ?? "None")")
+            Text("History: \(viewModel.historyPgn)")
         }
     }
     var body: some View {
