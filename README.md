@@ -2,7 +2,7 @@
 
 - [x] History
 - [x] Pawn enpassant
-- [ ] Pawn promotion
+- [x] Pawn promotion
 - [x] Game ending
 - [ ] Fog of war
 - [ ] Sounds
