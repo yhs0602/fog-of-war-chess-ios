@@ -118,9 +118,9 @@
 				46C280612A8226E300CE1DF5 /* Board.swift */,
 				46C280692A82391B00CE1DF5 /* Board+Pawn.swift */,
 				46C280632A82278900CE1DF5 /* Move.swift */,
+				46C2806D2A83348A00CE1DF5 /* Move+Pgn.swift */,
 				46C280672A8233CE00CE1DF5 /* Coord.swift */,
 				46C2806B2A83264200CE1DF5 /* ChessColor.swift */,
-				46C2806D2A83348A00CE1DF5 /* Move+Pgn.swift */,
 			);
 			path = fogofwarchess;
 			sourceTree = "<group>";

@@ -68,9 +68,12 @@ class Board: ObservableObject {
 
         if let captureTarget = move.captureTarget { // en passant
             squares[captureTarget.row][captureTarget.column] = nil
+        } else if let castlingRook = move.castlingRook {
+
         }
 
         piece.pos = move.to
+        piece.moved = true
         squares[toRow][toColumn] = piece
         squares[fromRow][fromColumn] = nil
 
@@ -251,7 +254,58 @@ class Board: ObservableObject {
                 }
             }
         }
-
+        // castling
+        print("Castling check: \(piece.moved)")
+        if !piece.moved {
+            // left rook
+            if let leftRook = pieceAt(coord: Coord(column: 0, row: piece.row)) {
+                print("Left rook check: \(piece.moved) \(leftRook.moved)")
+                if leftRook.type == .rook && leftRook.moved == false {
+                    var canCastle = true
+                    for i in 1..<piece.column {
+                        if pieceAt(coord: Coord(column: i, row: piece.row)) != nil {
+                            canCastle = false
+                            break
+                        }
+                    }
+                    if canCastle {
+                        result.append(
+                            Move(
+                                board: board,
+                                piece: piece,
+                                from: piece.pos,
+                                to: Coord(column: piece.column - 2, row: piece.row),
+                                castlingRook: leftRook
+                            )
+                        )
+                    }
+                }
+            }
+            // right rook
+            if let rightRook = pieceAt(coord: Coord(column: 0, row: piece.row)) {
+                print("Right  rook check: \(piece.moved) \(rightRook.moved)")
+                if rightRook.type == .rook && rightRook.moved == false {
+                    var canCastle = true
+                    for i in (piece.column + 1)..<7 {
+                        if pieceAt(coord: Coord(column: i, row: piece.row)) != nil {
+                            canCastle = false
+                            break
+                        }
+                    }
+                    if canCastle {
+                        result.append(
+                            Move(
+                                board: board,
+                                piece: piece,
+                                from: piece.pos,
+                                to: Coord(column: piece.column + 2, row: piece.row),
+                                castlingRook: rightRook
+                            )
+                        )
+                    }
+                }
+            }
+        }
         return result
     }
 

@@ -31,6 +31,7 @@ struct CellView: View {
             }
             if move != nil {
                 Text("x")
+                    .foregroundColor(.red)
             }
         }.onTapGesture {
             cellTapped(row, column)
@@ -65,6 +66,7 @@ struct ContentView: View {
             Text("Current turn: \(viewModel.currentColor.rawValue)")
             Text("Selected Piece: \(viewModel.selectedPiece?.description ?? "None")")
             Text("History: \(viewModel.historyPgn)")
+            Text("Game phase: \(viewModel.gamePhase.rawValue)")
         }
     }
     var body: some View {

@@ -60,6 +60,7 @@ class ChessPiece: CustomStringConvertible {
     let color: ChessColor
     // Coordinates managed by the Board
     var pos: Coord
+    var moved: Bool
     var row: Int {
         return pos.row
     }
@@ -75,10 +76,11 @@ class ChessPiece: CustomStringConvertible {
         }
     }
 
-    init(type: ChessPieceType, color: ChessColor, pos: Coord) {
+    init(type: ChessPieceType, color: ChessColor, pos: Coord, moved: Bool = false) {
         self.type = type
         self.color = color
         self.pos = pos
+        self.moved = moved
     }
 
     var description: String {
