@@ -33,7 +33,8 @@ struct CellView: View {
                 Text("x")
                     .foregroundColor(.red)
             }
-        }.onTapGesture {
+        }.frame(width: squareSize, height: squareSize)
+            .onTapGesture {
             cellTapped(row, column)
         }
     }
@@ -43,30 +44,32 @@ struct ContentView: View {
     @StateObject private var viewModel = ContentViewModel()
 
     var chessBoard: some View {
-        VStack {
+        VStack(alignment: .center) {
             GeometryReader { geometry in
-                let squareSize = min(geometry.size.width, geometry.size.height) / 9
-                HStack(spacing: 0) {
-                    ForEach(0..<8) { i in
-                        VStack(spacing: 0) {
-                            ForEach(0..<8) { j in
-                                CellView(
-                                    squareSize: squareSize,
-                                    row: j,
-                                    column: i,
-                                    cellTapped: viewModel.cellTapped,
-                                    piece: viewModel.pieceAt(row: j, column: i),
-                                    move: viewModel.moveAt(row: j, column: i)
-                                )
+                VStack {
+                    let squareSize = min(geometry.size.width, geometry.size.height) / 8
+                    HStack(spacing: 0) {
+                        ForEach(0..<8) { i in
+                            VStack(spacing: 0) {
+                                ForEach(0..<8) { j in
+                                    CellView(
+                                        squareSize: squareSize,
+                                        row: j,
+                                        column: i,
+                                        cellTapped: viewModel.cellTapped,
+                                        piece: viewModel.pieceAt(row: j, column: i),
+                                        move: viewModel.moveAt(row: j, column: i)
+                                    )
+                                }
                             }
                         }
                     }
+                    Text("Current turn: \(viewModel.currentColor.rawValue)")
+                    Text("Selected Piece: \(viewModel.selectedPiece?.description ?? "None")")
+                    Text("History: \(viewModel.historyPgn)")
+                    Text("Game phase: \(viewModel.gamePhase.rawValue)")
                 }
-            }
-            Text("Current turn: \(viewModel.currentColor.rawValue)")
-            Text("Selected Piece: \(viewModel.selectedPiece?.description ?? "None")")
-            Text("History: \(viewModel.historyPgn)")
-            Text("Game phase: \(viewModel.gamePhase.rawValue)")
+            }.border(.black)
         }
     }
     var body: some View {
