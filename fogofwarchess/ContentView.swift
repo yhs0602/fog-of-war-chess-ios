@@ -73,6 +73,9 @@ struct ContentView: View {
                 Text("Selected Piece: \(viewModel.selectedPiece?.description ?? "None")")
                 Text("History: \(viewModel.historyPgn)")
                 Text("Game phase: \(viewModel.gamePhase.rawValue)")
+                Button("Reset") {
+                    viewModel.reset()
+                }
             }
         }.border(.black)
             .confirmationDialog("Select a color", isPresented: Binding<Bool>(

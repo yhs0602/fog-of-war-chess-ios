@@ -161,4 +161,14 @@ class ContentViewModel: ObservableObject {
             isVisibleCoord[$0.pos] = true
         }
     }
+
+    func reset() {
+        board = Board()
+        currentColor = .white
+        gamePhase = .playing
+        selectedPiece = nil
+        possibleMoves = []
+        promotingPawn = nil
+        calculateVisibleCoords()
+    }
 }

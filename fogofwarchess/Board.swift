@@ -90,6 +90,7 @@ class Board: ObservableObject {
                 ), row: move.to.row, column: move.to.column
             )
         } else if let castlingRook = move.castlingRook {
+            removePieceAt(row: piece.row, column: piece.column)
             place(piece: piece, row: toRow, column: toColumn) // king move
             removePieceAt(row: castlingRook.row, column: castlingRook.column)
             if fromColumn > toColumn { // left rook
