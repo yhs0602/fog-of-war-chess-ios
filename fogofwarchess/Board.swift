@@ -28,6 +28,18 @@ class Board: ObservableObject {
         squares[row][column] = nil
     }
 
+    func pieces(color: ChessColor) -> [ChessPiece] {
+        var result: [ChessPiece] = []
+        for row in squares {
+            for piece in row {
+                if let piece, piece.color == color {
+                    result.append(piece)
+                }
+            }
+        }
+        return result
+    }
+
     func initializePieces() {
         // Place black pieces
         place(piece: ChessPiece(type: .rook, color: .black, pos: Coord(column: 0, row: 0)), row: 0, column: 0)

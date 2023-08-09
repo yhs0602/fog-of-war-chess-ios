@@ -18,13 +18,16 @@ struct CellView: View {
     let cellTapped: (Int, Int) -> Void
     let piece: ChessPiece?
     let move: Move?
+    let visible: Bool
     var body: some View {
         ZStack {
             Rectangle()
                 .frame(width: squareSize, height: squareSize)
-                .foregroundColor((row + column) % 2 == 0 ? .ivory : .teal)
+                .foregroundColor(
+                visible ? (row + column) % 2 == 0 ? .ivory : .teal: .gray
+            )
 
-            if let piece {
+            if let piece, visible {
                 Image(piece.image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -35,7 +38,9 @@ struct CellView: View {
             }
         }.frame(width: squareSize, height: squareSize)
             .onTapGesture {
-            cellTapped(row, column)
+            if visible {
+                cellTapped(row, column)
+            }
         }
     }
 }
@@ -57,7 +62,8 @@ struct ContentView: View {
                                     column: i,
                                     cellTapped: viewModel.cellTapped,
                                     piece: viewModel.pieceAt(row: j, column: i),
-                                    move: viewModel.moveAt(row: j, column: i)
+                                    move: viewModel.moveAt(row: j, column: i),
+                                    visible: viewModel.isVisibleCoord[Coord(column: i, row: j)] == true
                                 )
                             }
                         }
@@ -76,11 +82,9 @@ struct ContentView: View {
             Button("Queen") {
                 viewModel.promote(pieceType: .queen)
             }
-
             Button("Rook") {
                 viewModel.promote(pieceType: .rook)
             }
-
             Button("Bishop") {
                 viewModel.promote(pieceType: .bishop)
             }

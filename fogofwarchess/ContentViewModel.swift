@@ -25,14 +25,16 @@ class ContentViewModel: ObservableObject {
     }
     @Published var currentColor: ChessColor = .white
     @Published var gamePhase: GamePhase = .playing
-    @Published var moveAt: [Coord: Move?] = [:]
+    @Published var moveAt: [Coord: Move] = [:]
     @Published var promotingPawn: ChessPiece?
+    @Published var isVisibleCoord: [Coord: Bool] = [:]
 
     init() {
         self.board = Board()
         self.selectedPiece = nil
         self.possibleMoves = []
         self.board.initializePieces()
+        calculateVisibleCoords()
     }
 
     func cellTapped(row: Int, column: Int) {
@@ -85,6 +87,7 @@ class ContentViewModel: ObservableObject {
 
     func swapTurn() {
         currentColor = currentColor.opposite
+        calculateVisibleCoords()
     }
 
     func pieceAt(row: Int, column: Int) -> ChessPiece? {
@@ -140,6 +143,22 @@ class ContentViewModel: ObservableObject {
             gamePhase = .black_win
         case .white:
             gamePhase = .white_win
+        }
+    }
+
+    func calculateVisibleCoords() {
+        isVisibleCoord = [Coord: Bool]() // reset the map
+        board.pieces(color: currentColor).forEach {
+            let moves: [Move]
+            if $0.type == .pawn {
+                moves = board.getPawnPossibleMoves(for: $0)
+            } else {
+                moves = board.getPossibleMovesWithoutPawn(piece: $0)
+            }
+            for move in moves {
+                isVisibleCoord[move.to] = true
+            }
+            isVisibleCoord[$0.pos] = true
         }
     }
 }

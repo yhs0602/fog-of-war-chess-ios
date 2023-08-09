@@ -54,7 +54,7 @@ extension Move {
             let ambiguousPieces = self.board.filter {
                 piece.type == $0.type && piece.color == $0.color && piece !== $0
             }.filter {
-                let moves = board.getPossibleMovesWithoutPawn( piece: $0)
+                let moves = board.getPossibleMovesWithoutPawn(piece: $0)
                 return moves.contains { move in move.to == to }
             }
             if !ambiguousPieces.isEmpty {
