@@ -91,39 +91,47 @@ class Board: ObservableObject {
         var result = [Move]()
 
         // Extend to 4 directions
-        for i in (piece.column + 1)...7 {
-            let targetCoord = Coord(column: i, row: piece.row)
-            if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
-                continue
-            } else {
-                break
+        if piece.column < 7 {
+            for i in (piece.column + 1)...7 {
+                let targetCoord = Coord(column: i, row: piece.row)
+                if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
+                    continue
+                } else {
+                    break
+                }
             }
         }
 
-        for i in stride(from: piece.column - 1, to: 0, by: -1) {
-            let targetCoord = Coord(column: i, row: piece.row)
-            if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
-                continue
-            } else {
-                break
+        if piece.column > 0 {
+            for i in stride(from: piece.column - 1, through: 0, by: -1) {
+                let targetCoord = Coord(column: i, row: piece.row)
+                if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
+                    continue
+                } else {
+                    break
+                }
             }
         }
 
-        for i in (piece.row + 1)...7 {
-            let targetCoord = Coord(column: piece.column, row: i)
-            if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
-                continue
-            } else {
-                break
+        if piece.row < 7 {
+            for i in (piece.row + 1)...7 {
+                let targetCoord = Coord(column: piece.column, row: i)
+                if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
+                    continue
+                } else {
+                    break
+                }
             }
         }
 
-        for i in stride(from: piece.row - 1, to: 0, by: -1) {
-            let targetCoord = Coord(column: piece.column, row: i)
-            if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
-                continue
-            } else {
-                break
+        if piece.row > 0 {
+            for i in stride(from: piece.row - 1, through: 0, by: -1) {
+                let targetCoord = Coord(column: piece.column, row: i)
+                if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
+                    continue
+                } else {
+                    break
+                }
             }
         }
         return result
@@ -133,8 +141,11 @@ class Board: ObservableObject {
         var result = [Move]()
 
         // Extend to 4 diagonals
-        for i in 1...min(7 - piece.column, 7 - piece.row) {
+        for i in 1...7 {
             let targetCoord = Coord(column: piece.column + i, row: piece.row + i)
+            if !targetCoord.isValid() {
+                break
+            }
             if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
                 continue
             } else {
@@ -142,8 +153,11 @@ class Board: ObservableObject {
             }
         }
 
-        for i in 1...min(piece.column, 7 - piece.row) {
+        for i in 1...7 {
             let targetCoord = Coord(column: piece.column - i, row: piece.row + i)
+            if !targetCoord.isValid() {
+                break
+            }
             if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
                 continue
             } else {
@@ -151,8 +165,11 @@ class Board: ObservableObject {
             }
         }
 
-        for i in 1...min(7 - piece.column, piece.row) {
+        for i in 1...7 {
             let targetCoord = Coord(column: piece.column + i, row: piece.row - i)
+            if !targetCoord.isValid() {
+                break
+            }
             if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
                 continue
             } else {
@@ -160,8 +177,11 @@ class Board: ObservableObject {
             }
         }
 
-        for i in 1...min(piece.column, piece.row) {
+        for i in 1...7 {
             let targetCoord = Coord(column: piece.column - i, row: piece.row - i)
+            if !targetCoord.isValid() {
+                break
+            }
             if captureOrMove(piece: piece, targetCoord: targetCoord, to: &result) {
                 continue
             } else {
