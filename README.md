@@ -4,10 +4,10 @@
 - [x] Pawn enpassant
 - [x] Pawn promotion
 - [x] Game ending
-- [ ] Fog of war
+- [x] Fog of war
 - [ ] Sounds
 - [ ] Pgn export
-- [ ] Reset
+- [x] Reset
 - [x] Castling
 - [ ] Replay
 - [ ] AI
