@@ -18,6 +18,7 @@
 		46C280662A8227E400CE1DF5 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C280652A8227E400CE1DF5 /* ContentViewModel.swift */; };
 		46C280682A8233CE00CE1DF5 /* Coord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C280672A8233CE00CE1DF5 /* Coord.swift */; };
 		46C2806A2A82391B00CE1DF5 /* Board+Pawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C280692A82391B00CE1DF5 /* Board+Pawn.swift */; };
+		46C2806C2A83264200CE1DF5 /* ChessColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C2806B2A83264200CE1DF5 /* ChessColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		46C280652A8227E400CE1DF5 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		46C280672A8233CE00CE1DF5 /* Coord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coord.swift; sourceTree = "<group>"; };
 		46C280692A82391B00CE1DF5 /* Board+Pawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Board+Pawn.swift"; sourceTree = "<group>"; };
+		46C2806B2A83264200CE1DF5 /* ChessColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				46C280692A82391B00CE1DF5 /* Board+Pawn.swift */,
 				46C280632A82278900CE1DF5 /* Move.swift */,
 				46C280672A8233CE00CE1DF5 /* Coord.swift */,
+				46C2806B2A83264200CE1DF5 /* ChessColor.swift */,
 			);
 			path = fogofwarchess;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46C2806C2A83264200CE1DF5 /* ChessColor.swift in Sources */,
 				46C280602A82267D00CE1DF5 /* Piece.swift in Sources */,
 				46C280522A82185000CE1DF5 /* ContentView.swift in Sources */,
 				46C280622A8226E300CE1DF5 /* Board.swift in Sources */,

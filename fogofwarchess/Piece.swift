@@ -11,15 +11,7 @@ enum ChessPieceType: String {
     case king, queen, rook, bishop, knight, pawn
 }
 
-enum ChessColor {
-    case black, white
-
-    var opposite: ChessColor {
-        return self == .black ? .white : .black
-    }
-}
-
-class ChessPiece {
+class ChessPiece: CustomStringConvertible {
     let type: ChessPieceType
     let color: ChessColor
     // Coordinates managed by the Board
@@ -37,4 +29,7 @@ class ChessPiece {
         self.pos = pos
     }
 
+    var description: String {
+        return "\(color) \(type) at \(pos.coordCode)"
+    }
 }

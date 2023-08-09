@@ -61,13 +61,14 @@ extension Board {
             }
         }
         getPawnCaptures(piece: piece, to: &result)
-        getPawnEnpassant(result)
+        getPawnEnpassant(piece: piece, history: moveHistory, to: &result)
         return result
     }
 
     func addMoveIfCanCapture(piece: ChessPiece, candidate: Coord, to result: inout [Move]) {
         if canCapture(piece: piece, target: candidate) {
-            result.append(Move(piece: piece, from: piece.pos, to: candidate))
+            result.append(Move(piece: piece,
+                               from: piece.pos, to: candidate))
         }
     }
 

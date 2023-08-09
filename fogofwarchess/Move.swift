@@ -13,7 +13,7 @@ class Move {
     let to: Coord
     let captureTarget: ChessPiece? = nil
 
-    init(piece: ChessPiece, from: Coord, to: Coord) {
+    init(piece: ChessPiece, from: Coord, to: Coord, captureTarget: ChessPiece? = nil) {
         self.piece = piece
         self.from = from
         self.to = to

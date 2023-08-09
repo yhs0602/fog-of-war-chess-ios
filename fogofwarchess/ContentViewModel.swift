@@ -15,9 +15,17 @@ enum GamePhase: String {
 class ContentViewModel: ObservableObject {
     @Published var board: Board
     @Published var selectedPiece: ChessPiece?
-    @Published var possibleMoves: [Move] = []
+    @Published var possibleMoves: [Move] = [] {
+        willSet {
+            moveAt = [:]
+            for move in newValue {
+                moveAt[move.to] = move
+            }
+        }
+    }
     @Published var currentColor: ChessColor = .white
     @Published var gamePhase: GamePhase = .playing
+    @Published var moveAt: [Coord: Move?] = [:]
 
     init() {
         self.board = Board()
@@ -60,9 +68,9 @@ class ContentViewModel: ObservableObject {
         possibleMoves = []
         switch winner {
         case nil:
-                // TODO: handle promotion
-                selectedPiece = nil
-                swapTurn()
+            // TODO: handle promotion
+            selectedPiece = nil
+            swapTurn()
         case .black:
             gamePhase = .black_win
 
@@ -90,7 +98,11 @@ class ContentViewModel: ObservableObject {
         if piece.type == .pawn {
             return board.getPawnPossibleMoves(for: piece)
         } else {
-            return board.getPossibleMovesWithoutPawn()
+            return board.getPossibleMovesWithoutPawn(piece: piece)
         }
+    }
+
+    func moveAt(row: Int, column: Int) -> Move? {
+        return moveAt[Coord(column: column, row: row)] ?? nil
     }
 }

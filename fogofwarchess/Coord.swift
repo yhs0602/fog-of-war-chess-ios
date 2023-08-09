@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Coord {
+struct Coord: Hashable {
     let column: Int
     let row: Int
 
@@ -28,5 +28,10 @@ struct Coord {
 
     func isValid() -> Bool {
         return (0...7).contains(column) && (0...7).contains(row)
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(column)
+        hasher.combine(row)
     }
 }

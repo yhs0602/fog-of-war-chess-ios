@@ -16,19 +16,22 @@ struct CellView: View {
     let row: Int
     let column: Int
     let cellTapped: (Int, Int) -> Void
-    let pieceAt: (Int, Int) -> ChessPiece?
+    let piece: ChessPiece?
+    let move: Move?
     var body: some View {
         ZStack {
             Rectangle()
                 .frame(width: squareSize, height: squareSize)
                 .foregroundColor((row + column) % 2 == 0 ? .ivory : .teal)
-                .onTapGesture {
-                    cellTapped(row, column)
 
-            }
-            if let piece = pieceAt(row, column) {
+            if let piece {
                 Text(piece.type.rawValue)
             }
+            if move != nil {
+                Text("x")
+            }
+        }.onTapGesture {
+            cellTapped(row, column)
         }
     }
 }
@@ -37,23 +40,28 @@ struct ContentView: View {
     @StateObject private var viewModel = ContentViewModel()
 
     var chessBoard: some View {
-        GeometryReader { geometry in
-            let squareSize = min(geometry.size.width, geometry.size.height) / 9
-            HStack(spacing: 0) {
-                ForEach(0..<8) { i in
-                    VStack(spacing: 0) {
-                        ForEach(0..<8) { j in
-                            CellView(
-                                squareSize: squareSize,
-                                row: j,
-                                column: i,
-                                cellTapped: viewModel.cellTapped,
-                                pieceAt: viewModel.pieceAt
-                            )
+        VStack {
+            GeometryReader { geometry in
+                let squareSize = min(geometry.size.width, geometry.size.height) / 9
+                HStack(spacing: 0) {
+                    ForEach(0..<8) { i in
+                        VStack(spacing: 0) {
+                            ForEach(0..<8) { j in
+                                CellView(
+                                    squareSize: squareSize,
+                                    row: j,
+                                    column: i,
+                                    cellTapped: viewModel.cellTapped,
+                                    piece: viewModel.pieceAt(row: j, column: i),
+                                    move: viewModel.moveAt(row: j, column: i)
+                                )
+                            }
                         }
                     }
                 }
             }
+            Text("Current turn: \(viewModel.currentColor.rawValue)")
+            Text("Selected Piece: \(viewModel.selectedPiece?.description ?? "halal")")
         }
     }
     var body: some View {
