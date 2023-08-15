@@ -16,6 +16,8 @@ struct BoardState {
     let fullMoveNumber: Int
     let coordVisibility: [Coord: Bool]
 
+    static let DefaultFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+
     init(
         pieces: [Coord: ChessPiece],
         turn: ChessColor,
@@ -33,6 +35,51 @@ struct BoardState {
         self.fullMoveNumber = fullMoveNumber
         self.coordVisibility = coordVisibility
     }
+
+    static func applyMove(_ board: BoardState, _ move: Move) -> (BoardState, ChessColor?) {
+        var pieces = board.pieces
+        var castling = board.castling
+
+        pieces.removeValue(forKey: move.piece.pos)
+
+        if let captureTarget = move.captureTarget {
+            pieces.removeValue(forKey: captureTarget.pos)
+        }
+
+        let enPassant: Coord? = (move.piece.type == .pawn && abs(move.piece.rank - move.to.rank) == 2)
+        ? (move.piece.color == .black ? Coord(file: move.piece.file, rank: move.piece.rank - 1)
+               : Coord(file: move.piece.file, rank: move.piece.rank + 1))
+        : nil
+
+        let newPiece = ChessPiece(
+            type: move.promotingTo ?? move.piece.type, color: move.piece.color, pos: move.to
+        )
+        pieces[move.to] = newPiece
+
+        // ... other move logic and castling logic similar to the Kotlin implementation ...
+
+        let sideToMove: ChessColor = (board.turn == .black) ? .white : .black
+        let fullMoveNumber: Int = (sideToMove == .white) ? board.fullMoveNumber + 1 : board.fullMoveNumber
+        let halfMoveClock: Int = (move.piece.type == .pawn || move.captureTarget != nil) ? 0 : board.halfMoveClock + 1
+
+        let winner: ChessColor? = (move.captureTarget?.type == .king) ? move.piece.color : nil
+
+        let newBoardState = BoardState(pieces: pieces, turn: sideToMove, castling: castling, enPassantTarget: enPassant, halfMoveClock: halfMoveClock, fullMoveNumber: fullMoveNumber)
+
+        return (newBoardState, winner)
+    }
+
+    static let EmptyBoardState = BoardState(
+        pieces: [:],
+        turn: .white,
+        castling: [
+            .white: [true, true],
+            .black: [true, true]
+        ],
+        enPassantTarget: nil,
+        halfMoveClock: 0,
+        fullMoveNumber: 1
+    )
 
     func toFen() -> String {
         // Generate the piece placement string

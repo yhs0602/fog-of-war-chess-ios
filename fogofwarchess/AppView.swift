@@ -17,7 +17,13 @@ struct AppView: View {
                     .padding(4)
                 Spacer()
                     .frame(height: 70)
-                NavigationLink(destination: InGameView()) {
+                NavigationLink(
+                    destination: InGameView(
+                        color: .white,
+                        shouldReset: true,
+                        serverType: .singlePlay
+                    )
+                ) {
                     Text("SinglePlayer")
                         .frame(width: 100)
                         .padding(6)
@@ -25,7 +31,7 @@ struct AppView: View {
                         .stroke(Color.accentColor, lineWidth: 4))
                 }
                 NavigationLink(destination: TurnCoverView(
-                    color: "white",
+                    color: .white,
                     shouldReset: true
                 )) {
                     Text("Pass And Play")

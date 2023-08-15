@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Move {
+class Move: Equatable {
     let piece: ChessPiece
     let to: Coord
     let castlingRook: ChessPiece?
@@ -20,5 +20,17 @@ class Move {
         self.castlingRook = castlingRook
         self.promotingTo = promotingTo
         self.captureTarget = captureTarget
+    }
+
+    static func == (lhs: Move, rhs: Move) -> Bool {
+        return lhs.piece == rhs.piece &&
+            lhs.to == rhs.to &&
+            lhs.castlingRook == rhs.castlingRook &&
+            lhs.promotingTo == rhs.promotingTo &&
+            lhs.captureTarget == rhs.captureTarget
+    }
+
+    func shouldPromote() -> Bool {
+        return (piece.type == .pawn) && (to.rank == 1 || to.rank == 8)
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Coord: Hashable {
     let file: Int
@@ -24,6 +25,14 @@ struct Coord: Hashable {
         return Character(String(number))
     }
 
+    var color: Color {
+        if ((file + rank) % 2 == 0) {
+            return .ivory
+        } else {
+            return .teal
+        }
+    }
+
     init(file: Int, rank: Int) {
         self.file = file
         self.rank = rank
@@ -36,5 +45,9 @@ struct Coord: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(file)
         hasher.combine(rank)
+    }
+
+    func offset(dr: Int, df: Int) -> Coord {
+        return Coord(file: file + df, rank: rank + dr)
     }
 }

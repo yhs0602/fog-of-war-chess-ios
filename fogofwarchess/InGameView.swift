@@ -11,20 +11,111 @@ extension Color {
     static let ivory = Color(red: 255 / 255, green: 255 / 255, blue: 240 / 255)
 }
 
+struct InGameView: View {
+    let color: ChessColor?
+    let shouldReset: Bool
+    let serverType: ServerType
+    let roomId: String?
+
+    @StateObject private var viewModel: InGameViewModel
+
+    init(color: ChessColor?, shouldReset: Bool, serverType: ServerType, roomId: String? = nil) {
+        self.color = color
+        self.shouldReset = shouldReset
+        self.serverType = serverType
+        self.roomId = roomId
+        self._viewModel = StateObject(
+            wrappedValue: InGameViewModel(serverType: serverType, roomId: roomId)
+        )
+    }
+
+
+    var chessBoard: some View {
+        GeometryReader { geometry in
+            let board = viewModel.board
+            let squareSize = min(geometry.size.width, geometry.size.height) / 8
+            VStack {
+                HStack(spacing: 0) {
+                    ForEach(0..<8 as Range<Int>) { file in
+                        VStack(spacing: 0) {
+                            ForEach(0..<8 as Range<Int>) { (rank) -> CellView in
+                                let coord = Coord(file: file + 1, rank: rank + 1)
+                                CellView(
+                                    squareSize: squareSize,
+                                    coord: coord,
+                                    piece: board.pieces[coord],
+                                    visible: board.coordVisibility[coord] == true,
+                                    hasMove: viewModel.selectedPossibleMoves.contains { move in
+                                        move.to == coord
+                                    },
+                                    cellTapped: viewModel.cellTapped
+                                )
+                            }
+                        }
+                    }
+                }.border(.black)
+                Text("Current turn: \(board.turn.rawValue)")
+                Text("Selected Piece: \(viewModel.selectedPiece?.description ?? "None")")
+//                if viewModel.gamePhase != .playing {
+//                    Text("History: \(viewModel.historyPgn)")
+//                    Button("Copy PGN") {
+//                        let pgn = viewModel.historyPgn
+//                        let pasteboard = UIPasteboard.general
+//                        pasteboard.string = pgn
+//                    }
+//                }
+//                Text("Game phase: \(board.)")
+//                Button("Reset") {
+//                    viewModel.reset()
+//                }
+            }
+        }.border(.black)
+            .confirmationDialog("Select a color", isPresented: Binding<Bool>(
+            get: { viewModel.promotingMove != nil },
+            set: { _ in viewModel.promotingMove = nil }
+        ), titleVisibility: .visible) {
+            Button("Queen") {
+                viewModel.promotePiece(toType: .queen)
+            }
+            Button("Rook") {
+                viewModel.promotePiece(toType: .rook)
+            }
+            Button("Bishop") {
+                viewModel.promotePiece(toType: .bishop)
+            }
+            Button("Knight") {
+                viewModel.promotePiece(toType: .knight)
+            }
+        }
+    }
+    var body: some View {
+        chessBoard.onAppear {
+            print("Color: \(color) shouldReset: \(shouldReset)")
+            if let color { // pass and play or singleplay
+                if shouldReset {
+                    viewModel.reset(playerColor: color)
+                } else {
+                    viewModel.nextTurn()
+                }
+            }
+        }
+    }
+}
+
 struct CellView: View {
     let squareSize: CGFloat
-    let row: Int
-    let column: Int
-    let cellTapped: (Int, Int) -> Void
+    let coord: Coord
     let piece: ChessPiece?
-    let move: Move?
     let visible: Bool
+    let hasMove: Bool
+    let cellTapped: (Coord) -> Void
+
     var body: some View {
         ZStack {
             Rectangle()
                 .frame(width: squareSize, height: squareSize)
                 .foregroundColor(
-                visible ? (row + column) % 2 == 0 ? .ivory : .teal: .gray
+                visible ? coord.color : .gray
             )
 
             if let piece, visible {
@@ -32,84 +123,25 @@ struct CellView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             }
-            if move != nil {
+            if hasMove {
                 Text("x")
                     .foregroundColor(.red)
             }
         }.frame(width: squareSize, height: squareSize)
             .onTapGesture {
             if visible {
-                cellTapped(row, column)
+                cellTapped(coord)
             }
         }
-    }
-}
-
-struct InGameView: View {
-    @StateObject private var viewModel = InGameViewModel()
-
-    var chessBoard: some View {
-        GeometryReader { geometry in
-            VStack {
-                let squareSize = min(geometry.size.width, geometry.size.height) / 8
-                HStack(spacing: 0) {
-                    ForEach(0..<8) { i in
-                        VStack(spacing: 0) {
-                            ForEach(0..<8) { j in
-                                CellView(
-                                    squareSize: squareSize,
-                                    row: j,
-                                    column: i,
-                                    cellTapped: viewModel.cellTapped,
-                                    piece: viewModel.pieceAt(row: j, column: i),
-                                    move: viewModel.moveAt(row: j, column: i),
-                                    visible: viewModel.isVisibleCoord[Coord(column: i, row: j)] == true
-                                )
-                            }
-                        }
-                    }
-                }.border(.black)
-                Text("Current turn: \(viewModel.currentColor.rawValue)")
-                Text("Selected Piece: \(viewModel.selectedPiece?.description ?? "None")")
-                if viewModel.gamePhase != .playing {
-                    Text("History: \(viewModel.historyPgn)")
-                    Button("Copy PGN") {
-                        let pgn = viewModel.historyPgn
-                        let pasteboard = UIPasteboard.general
-                        pasteboard.string = pgn
-                    }
-                }
-                Text("Game phase: \(viewModel.gamePhase.rawValue)")
-                Button("Reset") {
-                    viewModel.reset()
-                }
-            }
-        }.border(.black)
-            .confirmationDialog("Select a color", isPresented: Binding<Bool>(
-            get: { viewModel.promotingPawn != nil },
-            set: { _ in viewModel.promotingPawn = nil }
-        ), titleVisibility: .visible) {
-            Button("Queen") {
-                viewModel.promote(pieceType: .queen)
-            }
-            Button("Rook") {
-                viewModel.promote(pieceType: .rook)
-            }
-            Button("Bishop") {
-                viewModel.promote(pieceType: .bishop)
-            }
-            Button("Knight") {
-                viewModel.promote(pieceType: .knight)
-            }
-        }
-    }
-    var body: some View {
-        chessBoard
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        InGameView()
+        InGameView(
+            color: .white,
+            shouldReset: false,
+            serverType: .singlePlay
+        )
     }
 }
