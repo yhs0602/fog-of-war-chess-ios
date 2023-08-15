@@ -151,7 +151,6 @@ class InGameViewModel: ObservableObject {
         selectedPiece = nil
     }
 
-
     func promotePiece(toType: ChessPieceType) {
         guard let move = promotingMove else { return }
 
@@ -181,7 +180,6 @@ class InGameViewModel: ObservableObject {
         selectedPiece = nil
         promotingMove = nil
     }
-
 
     func nextTurn() {
         server.onNextTurnStart()

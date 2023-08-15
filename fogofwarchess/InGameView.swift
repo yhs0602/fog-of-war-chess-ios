@@ -29,7 +29,6 @@ struct InGameView: View {
         )
     }
 
-
     var chessBoard: some View {
         GeometryReader { geometry in
             let board = viewModel.board

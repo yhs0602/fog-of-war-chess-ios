@@ -26,7 +26,7 @@ struct Coord: Hashable {
     }
 
     var color: Color {
-        if ((file + rank) % 2 == 0) {
+        if (file + rank) % 2 == 0 {
             return .ivory
         } else {
             return .teal

@@ -67,7 +67,6 @@ extension BoardState {
         return getRookMoves(piece: piece) + getBishopMoves(piece: piece)
     }
 
-
     func getKingMoves(piece: ChessPiece) -> [Move] {
         var moves: [Move] = []
         let dx = [1, 1, 1, 0, 0, -1, -1, -1]

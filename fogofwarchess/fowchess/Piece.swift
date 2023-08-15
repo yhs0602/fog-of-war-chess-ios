@@ -97,7 +97,7 @@ class ChessPiece: CustomStringConvertible, Hashable {
 
     init(pieceChar: Character, coord: Coord) {
         self.pos = coord
-        if(pieceChar.isUppercase) {
+        if pieceChar.isUppercase {
             self.color = .white
         } else {
             self.color = .black
@@ -105,7 +105,6 @@ class ChessPiece: CustomStringConvertible, Hashable {
         self.type = ChessPieceType.fromShortName(Character(String(pieceChar).uppercased())) ?? .pawn
         self.moved = false
     }
-
 
     var description: String {
         return "\(color) \(type) at \(pos.coordCode)"

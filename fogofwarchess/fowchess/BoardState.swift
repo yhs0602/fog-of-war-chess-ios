@@ -47,8 +47,8 @@ struct BoardState {
         }
 
         let enPassant: Coord? = (move.piece.type == .pawn && abs(move.piece.rank - move.to.rank) == 2)
-        ? (move.piece.color == .black ? Coord(file: move.piece.file, rank: move.piece.rank - 1)
-               : Coord(file: move.piece.file, rank: move.piece.rank + 1))
+            ? (move.piece.color == .black ? Coord(file: move.piece.file, rank: move.piece.rank - 1)
+        : Coord(file: move.piece.file, rank: move.piece.rank + 1))
         : nil
 
         let newPiece = ChessPiece(
@@ -56,7 +56,45 @@ struct BoardState {
         )
         pieces[move.to] = newPiece
 
-        // ... other move logic and castling logic similar to the Kotlin implementation ...
+        // Handle castling.
+        if let rook = move.castlingRook {
+            pieces[rook.pos] = nil
+
+            var newRookPosition: Coord
+            switch move.to {
+            case Coord(file: 3, rank: 8):
+                newRookPosition = Coord(file: 4, rank: 8)
+            case Coord(file: 7, rank: 8):
+                newRookPosition = Coord(file: 6, rank: 8)
+            case Coord(file: 3, rank: 1):
+                newRookPosition = Coord(file: 4, rank: 1)
+            default:
+                newRookPosition = Coord(file: 6, rank: 1)
+            }
+
+            pieces[newRookPosition] = ChessPiece(type: rook.type, color: rook.color, pos: newRookPosition)
+        }
+
+        // Update castling rights if needed.
+        if move.piece.type == .rook || move.piece.type == .king {
+            let color = move.piece.color
+            switch (move.piece.rank, move.piece.file) {
+            case (8, 1):
+                castling[color] = [false, castling[color]?[1] ?? true]
+            case (8, 8):
+                castling[color] = [castling[color]?[0] ?? true, false]
+            case (1, 1):
+                castling[color] = [false, castling[color]?[1] ?? true]
+            case (1, 8):
+                castling[color] = [castling[color]?[0] ?? true, false]
+            default:
+                break
+            }
+
+            if move.piece.type == .king {
+                castling[color] = [false, false]
+            }
+        }
 
         let sideToMove: ChessColor = (board.turn == .black) ? .white : .black
         let fullMoveNumber: Int = (sideToMove == .white) ? board.fullMoveNumber + 1 : board.fullMoveNumber
@@ -73,8 +111,8 @@ struct BoardState {
         pieces: [:],
         turn: .white,
         castling: [
-            .white: [true, true],
-            .black: [true, true]
+                .white: [true, true],
+                .black: [true, true]
         ],
         enPassantTarget: nil,
         halfMoveClock: 0,
