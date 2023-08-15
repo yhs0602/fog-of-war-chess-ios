@@ -13,7 +13,7 @@ enum GamePhase: String {
     case playing, white_win, black_win
 }
 
-class ContentViewModel: ObservableObject {
+class InGameViewModel: ObservableObject {
     @Published var board: Board
     @Published var selectedPiece: ChessPiece?
     @Published var possibleMoves: [Move] = [] {
@@ -141,7 +141,7 @@ class ContentViewModel: ObservableObject {
     }
 
     func moveAt(row: Int, column: Int) -> Move? {
-        return moveAt[Coord(column: column, row: row)] ?? nil
+        return moveAt[Coord(file: column, rank: row)] ?? nil
     }
 
     var historyPgn: String {
@@ -160,9 +160,7 @@ class ContentViewModel: ObservableObject {
             if move.promotingTo == .pawn, i + 1 < history.count {
                 let promotingMove = history[i + 1]
                 let newMove = Move(
-                    board: move.board,
                     piece: move.piece,
-                    from: move.from,
                     to: move.to,
                     promotingTo: promotingMove.promotingTo
                 )
@@ -190,9 +188,7 @@ class ContentViewModel: ObservableObject {
         }
         let winner = board.apply(
             move: Move(
-                board: board.toSnapshot(),
                 piece: promotingPawn,
-                from: promotingPawn.pos,
                 to: promotingPawn.pos,
                 promotingTo: pieceType
             )
@@ -234,6 +230,7 @@ class ContentViewModel: ObservableObject {
         selectedPiece = nil
         possibleMoves = []
         promotingPawn = nil
+        board.initializePieces()
         calculateVisibleCoords()
     }
 }

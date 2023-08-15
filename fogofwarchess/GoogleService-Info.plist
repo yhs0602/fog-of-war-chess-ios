@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>853883376712-hpkna153f477jr7v1a681pece1n1b4lc.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.853883376712-hpkna153f477jr7v1a681pece1n1b4lc</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC8oQjAsJzMAqIuppiaVPnYGOdJg0Won8c</string>
+	<key>GCM_SENDER_ID</key>
+	<string>853883376712</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.kyhsgeekcode.fogofwarchess</string>
+	<key>PROJECT_ID</key>
+	<string>fog-of-war-chess</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fog-of-war-chess.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:853883376712:ios:7fcc19435ab838e5b5347d</string>
+</dict>
+</plist>

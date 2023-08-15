@@ -8,37 +8,33 @@
 import Foundation
 
 struct Coord: Hashable {
-    let column: Int
-    let row: Int
+    let file: Int
+    let rank: Int
 
     var coordCode: String {
         return "\(coordLetter)\(coordNumber)"
     }
 
     var coordLetter: Character {
-        return Character(UnicodeScalar("a".utf16.first! + UInt16(column))!)
+        return Character(UnicodeScalar("a".utf16.first! + UInt16(file - 1))!)
     }
 
     var coordNumber: Character {
-        let number = 8 - row
+        let number = 9 - rank
         return Character(String(number))
     }
 
-    init(column: Int, row: Int) {
-        self.column = column
-        self.row = row
-    }
-
-    init(_ coord: (Int, Int)) {
-        self.init(column: coord.0, row: coord.1)
+    init(file: Int, rank: Int) {
+        self.file = file
+        self.rank = rank
     }
 
     func isValid() -> Bool {
-        return (0...7).contains(column) && (0...7).contains(row)
+        return (1...8).contains(file) && (1...8).contains(rank)
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(column)
-        hasher.combine(row)
+        hasher.combine(file)
+        hasher.combine(rank)
     }
 }

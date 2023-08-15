@@ -9,17 +9,34 @@
 /* Begin PBXBuildFile section */
 		463184E72A83E34C00C6ABF6 /* place.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 463184E52A83E34C00C6ABF6 /* place.mp3 */; };
 		463184E82A83E34C00C6ABF6 /* drop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 463184E62A83E34C00C6ABF6 /* drop.mp3 */; };
+		4631E2EF2A84C323008A32C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4631E2EE2A84C323008A32C2 /* GoogleService-Info.plist */; };
+		4631E2F22A84C422008A32C2 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4631E2F12A84C422008A32C2 /* FirebaseAnalyticsSwift */; };
+		4631E2F42A84C422008A32C2 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 4631E2F32A84C422008A32C2 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		4631E2F62A84C422008A32C2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4631E2F52A84C422008A32C2 /* FirebaseAuth */; };
+		4631E2F82A84C422008A32C2 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4631E2F72A84C422008A32C2 /* FirebaseCrashlytics */; };
+		4631E2FA2A84C422008A32C2 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 4631E2F92A84C422008A32C2 /* FirebaseDatabase */; };
+		4631E2FC2A84C422008A32C2 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4631E2FB2A84C422008A32C2 /* FirebaseDatabaseSwift */; };
+		4631E2FE2A84C422008A32C2 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 4631E2FD2A84C422008A32C2 /* FirebaseMessaging */; };
+		4631E3002A84C422008A32C2 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 4631E2FF2A84C422008A32C2 /* FirebaseRemoteConfig */; };
+		4631E3022A84C422008A32C2 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4631E3012A84C422008A32C2 /* FirebaseRemoteConfigSwift */; };
+		4631E3042A84C606008A32C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4631E3032A84C606008A32C2 /* AppDelegate.swift */; };
+		4631E3062A84C987008A32C2 /* WaitingRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4631E3052A84C987008A32C2 /* WaitingRoomView.swift */; };
+		4631E3082A84C9A8008A32C2 /* EnterRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4631E3072A84C9A8008A32C2 /* EnterRoomView.swift */; };
+		4631E30A2A84CA8C008A32C2 /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4631E3092A84CA8C008A32C2 /* RoomView.swift */; };
+		464A52FC2A8B1AAD003CAC89 /* TurnCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464A52FB2A8B1AAD003CAC89 /* TurnCoverView.swift */; };
+		464A52FE2A8B2EC3003CAC89 /* FenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464A52FD2A8B2EC3003CAC89 /* FenParser.swift */; };
+		464A53002A8B2F2D003CAC89 /* BoardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464A52FF2A8B2F2D003CAC89 /* BoardState.swift */; };
+		464A53032A8B3C94003CAC89 /* BoardState+PawnMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464A53022A8B3C94003CAC89 /* BoardState+PawnMove.swift */; };
+		464A53052A8B4323003CAC89 /* BoardState+Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464A53042A8B4323003CAC89 /* BoardState+Move.swift */; };
 		46C280502A82185000CE1DF5 /* fogofwarchessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C2804F2A82185000CE1DF5 /* fogofwarchessApp.swift */; };
-		46C280522A82185000CE1DF5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C280512A82185000CE1DF5 /* ContentView.swift */; };
+		46C280522A82185000CE1DF5 /* InGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C280512A82185000CE1DF5 /* InGameView.swift */; };
 		46C280542A82185100CE1DF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C280532A82185100CE1DF5 /* Assets.xcassets */; };
 		46C280572A82185100CE1DF5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C280562A82185100CE1DF5 /* Preview Assets.xcassets */; };
 		46C2805E2A821E1C00CE1DF5 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C2805D2A821E1C00CE1DF5 /* AppView.swift */; };
 		46C280602A82267D00CE1DF5 /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C2805F2A82267D00CE1DF5 /* Piece.swift */; };
-		46C280622A8226E300CE1DF5 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C280612A8226E300CE1DF5 /* Board.swift */; };
 		46C280642A82278900CE1DF5 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C280632A82278900CE1DF5 /* Move.swift */; };
-		46C280662A8227E400CE1DF5 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C280652A8227E400CE1DF5 /* ContentViewModel.swift */; };
+		46C280662A8227E400CE1DF5 /* InGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C280652A8227E400CE1DF5 /* InGameViewModel.swift */; };
 		46C280682A8233CE00CE1DF5 /* Coord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C280672A8233CE00CE1DF5 /* Coord.swift */; };
-		46C2806A2A82391B00CE1DF5 /* Board+Pawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C280692A82391B00CE1DF5 /* Board+Pawn.swift */; };
 		46C2806C2A83264200CE1DF5 /* ChessColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C2806B2A83264200CE1DF5 /* ChessColor.swift */; };
 		46C2806E2A83348A00CE1DF5 /* Move+Pgn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C2806D2A83348A00CE1DF5 /* Move+Pgn.swift */; };
 		46C2807B2A83403800CE1DF5 /* nlt.png in Resources */ = {isa = PBXBuildFile; fileRef = 46C2806F2A83403600CE1DF5 /* nlt.png */; };
@@ -35,23 +52,32 @@
 		46C280852A83403800CE1DF5 /* pdt.png in Resources */ = {isa = PBXBuildFile; fileRef = 46C280792A83403700CE1DF5 /* pdt.png */; };
 		46C280862A83403800CE1DF5 /* qlt.png in Resources */ = {isa = PBXBuildFile; fileRef = 46C2807A2A83403800CE1DF5 /* qlt.png */; };
 		46C280882A83406600CE1DF5 /* chess_pieces_images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C280872A83406600CE1DF5 /* chess_pieces_images.xcassets */; };
+		46F60DB22A853D1800017B54 /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F60DB12A853D1800017B54 /* NetworkRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		463184E52A83E34C00C6ABF6 /* place.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = place.mp3; sourceTree = "<group>"; };
 		463184E62A83E34C00C6ABF6 /* drop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = drop.mp3; sourceTree = "<group>"; };
+		4631E2EE2A84C323008A32C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4631E3032A84C606008A32C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4631E3052A84C987008A32C2 /* WaitingRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomView.swift; sourceTree = "<group>"; };
+		4631E3072A84C9A8008A32C2 /* EnterRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomView.swift; sourceTree = "<group>"; };
+		4631E3092A84CA8C008A32C2 /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
+		464A52FB2A8B1AAD003CAC89 /* TurnCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnCoverView.swift; sourceTree = "<group>"; };
+		464A52FD2A8B2EC3003CAC89 /* FenParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FenParser.swift; sourceTree = "<group>"; };
+		464A52FF2A8B2F2D003CAC89 /* BoardState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardState.swift; sourceTree = "<group>"; };
+		464A53022A8B3C94003CAC89 /* BoardState+PawnMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BoardState+PawnMove.swift"; sourceTree = "<group>"; };
+		464A53042A8B4323003CAC89 /* BoardState+Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BoardState+Move.swift"; sourceTree = "<group>"; };
 		46C2804C2A82185000CE1DF5 /* fogofwarchess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fogofwarchess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C2804F2A82185000CE1DF5 /* fogofwarchessApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fogofwarchessApp.swift; sourceTree = "<group>"; };
-		46C280512A82185000CE1DF5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		46C280512A82185000CE1DF5 /* InGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InGameView.swift; sourceTree = "<group>"; };
 		46C280532A82185100CE1DF5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46C280562A82185100CE1DF5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		46C2805D2A821E1C00CE1DF5 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		46C2805F2A82267D00CE1DF5 /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
-		46C280612A8226E300CE1DF5 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		46C280632A82278900CE1DF5 /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
-		46C280652A8227E400CE1DF5 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		46C280652A8227E400CE1DF5 /* InGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InGameViewModel.swift; sourceTree = "<group>"; };
 		46C280672A8233CE00CE1DF5 /* Coord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coord.swift; sourceTree = "<group>"; };
-		46C280692A82391B00CE1DF5 /* Board+Pawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Board+Pawn.swift"; sourceTree = "<group>"; };
 		46C2806B2A83264200CE1DF5 /* ChessColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessColor.swift; sourceTree = "<group>"; };
 		46C2806D2A83348A00CE1DF5 /* Move+Pgn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Move+Pgn.swift"; sourceTree = "<group>"; };
 		46C2806F2A83403600CE1DF5 /* nlt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nlt.png; sourceTree = "<group>"; };
@@ -67,6 +93,7 @@
 		46C280792A83403700CE1DF5 /* pdt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pdt.png; sourceTree = "<group>"; };
 		46C2807A2A83403800CE1DF5 /* qlt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qlt.png; sourceTree = "<group>"; };
 		46C280872A83406600CE1DF5 /* chess_pieces_images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = chess_pieces_images.xcassets; sourceTree = "<group>"; };
+		46F60DB12A853D1800017B54 /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,12 +101,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4631E2FC2A84C422008A32C2 /* FirebaseDatabaseSwift in Frameworks */,
+				4631E2FA2A84C422008A32C2 /* FirebaseDatabase in Frameworks */,
+				4631E2FE2A84C422008A32C2 /* FirebaseMessaging in Frameworks */,
+				4631E3022A84C422008A32C2 /* FirebaseRemoteConfigSwift in Frameworks */,
+				4631E2F22A84C422008A32C2 /* FirebaseAnalyticsSwift in Frameworks */,
+				4631E2F82A84C422008A32C2 /* FirebaseCrashlytics in Frameworks */,
+				4631E2F62A84C422008A32C2 /* FirebaseAuth in Frameworks */,
+				4631E2F42A84C422008A32C2 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				4631E3002A84C422008A32C2 /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		464A53012A8B3404003CAC89 /* fowchess */ = {
+			isa = PBXGroup;
+			children = (
+				46C280632A82278900CE1DF5 /* Move.swift */,
+				464A52FD2A8B2EC3003CAC89 /* FenParser.swift */,
+				464A52FF2A8B2F2D003CAC89 /* BoardState.swift */,
+				46C2805F2A82267D00CE1DF5 /* Piece.swift */,
+				464A53022A8B3C94003CAC89 /* BoardState+PawnMove.swift */,
+				464A53042A8B4323003CAC89 /* BoardState+Move.swift */,
+			);
+			path = fowchess;
+			sourceTree = "<group>";
+		};
 		46C280432A82185000CE1DF5 = {
 			isa = PBXGroup;
 			children = (
@@ -112,21 +161,25 @@
 		46C2804E2A82185000CE1DF5 /* fogofwarchess */ = {
 			isa = PBXGroup;
 			children = (
+				464A53012A8B3404003CAC89 /* fowchess */,
+				4631E3032A84C606008A32C2 /* AppDelegate.swift */,
+				4631E2EE2A84C323008A32C2 /* GoogleService-Info.plist */,
 				463184E62A83E34C00C6ABF6 /* drop.mp3 */,
 				463184E52A83E34C00C6ABF6 /* place.mp3 */,
 				46C2805D2A821E1C00CE1DF5 /* AppView.swift */,
 				46C2804F2A82185000CE1DF5 /* fogofwarchessApp.swift */,
-				46C280512A82185000CE1DF5 /* ContentView.swift */,
-				46C280652A8227E400CE1DF5 /* ContentViewModel.swift */,
+				46C280512A82185000CE1DF5 /* InGameView.swift */,
+				46C280652A8227E400CE1DF5 /* InGameViewModel.swift */,
 				46C280532A82185100CE1DF5 /* Assets.xcassets */,
 				46C280552A82185100CE1DF5 /* Preview Content */,
-				46C2805F2A82267D00CE1DF5 /* Piece.swift */,
-				46C280612A8226E300CE1DF5 /* Board.swift */,
-				46C280692A82391B00CE1DF5 /* Board+Pawn.swift */,
-				46C280632A82278900CE1DF5 /* Move.swift */,
 				46C2806D2A83348A00CE1DF5 /* Move+Pgn.swift */,
 				46C280672A8233CE00CE1DF5 /* Coord.swift */,
 				46C2806B2A83264200CE1DF5 /* ChessColor.swift */,
+				4631E3052A84C987008A32C2 /* WaitingRoomView.swift */,
+				4631E3072A84C9A8008A32C2 /* EnterRoomView.swift */,
+				4631E3092A84CA8C008A32C2 /* RoomView.swift */,
+				46F60DB12A853D1800017B54 /* NetworkRepository.swift */,
+				464A52FB2A8B1AAD003CAC89 /* TurnCoverView.swift */,
 			);
 			path = fogofwarchess;
 			sourceTree = "<group>";
@@ -155,6 +208,17 @@
 			dependencies = (
 			);
 			name = fogofwarchess;
+			packageProductDependencies = (
+				4631E2F12A84C422008A32C2 /* FirebaseAnalyticsSwift */,
+				4631E2F32A84C422008A32C2 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				4631E2F52A84C422008A32C2 /* FirebaseAuth */,
+				4631E2F72A84C422008A32C2 /* FirebaseCrashlytics */,
+				4631E2F92A84C422008A32C2 /* FirebaseDatabase */,
+				4631E2FB2A84C422008A32C2 /* FirebaseDatabaseSwift */,
+				4631E2FD2A84C422008A32C2 /* FirebaseMessaging */,
+				4631E2FF2A84C422008A32C2 /* FirebaseRemoteConfig */,
+				4631E3012A84C422008A32C2 /* FirebaseRemoteConfigSwift */,
+			);
 			productName = fogofwarchess;
 			productReference = 46C2804C2A82185000CE1DF5 /* fogofwarchess.app */;
 			productType = "com.apple.product-type.application";
@@ -183,6 +247,9 @@
 				Base,
 			);
 			mainGroup = 46C280432A82185000CE1DF5;
+			packageReferences = (
+				4631E2F02A84C421008A32C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 46C2804D2A82185000CE1DF5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -208,6 +275,7 @@
 				463184E82A83E34C00C6ABF6 /* drop.mp3 in Resources */,
 				46C2807C2A83403800CE1DF5 /* bdt.png in Resources */,
 				46C2807B2A83403800CE1DF5 /* nlt.png in Resources */,
+				4631E2EF2A84C323008A32C2 /* GoogleService-Info.plist in Resources */,
 				46C280812A83403800CE1DF5 /* qdt.png in Resources */,
 				46C280572A82185100CE1DF5 /* Preview Assets.xcassets in Resources */,
 				463184E72A83E34C00C6ABF6 /* place.mp3 in Resources */,
@@ -224,15 +292,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4631E3042A84C606008A32C2 /* AppDelegate.swift in Sources */,
 				46C2806C2A83264200CE1DF5 /* ChessColor.swift in Sources */,
 				46C280602A82267D00CE1DF5 /* Piece.swift in Sources */,
-				46C280522A82185000CE1DF5 /* ContentView.swift in Sources */,
-				46C280622A8226E300CE1DF5 /* Board.swift in Sources */,
-				46C280662A8227E400CE1DF5 /* ContentViewModel.swift in Sources */,
+				46C280522A82185000CE1DF5 /* InGameView.swift in Sources */,
+				464A52FC2A8B1AAD003CAC89 /* TurnCoverView.swift in Sources */,
+				4631E3062A84C987008A32C2 /* WaitingRoomView.swift in Sources */,
+				464A53002A8B2F2D003CAC89 /* BoardState.swift in Sources */,
+				4631E3082A84C9A8008A32C2 /* EnterRoomView.swift in Sources */,
+				46C280662A8227E400CE1DF5 /* InGameViewModel.swift in Sources */,
 				46C2806E2A83348A00CE1DF5 /* Move+Pgn.swift in Sources */,
-				46C2806A2A82391B00CE1DF5 /* Board+Pawn.swift in Sources */,
+				464A53032A8B3C94003CAC89 /* BoardState+PawnMove.swift in Sources */,
 				46C280502A82185000CE1DF5 /* fogofwarchessApp.swift in Sources */,
 				46C280682A8233CE00CE1DF5 /* Coord.swift in Sources */,
+				46F60DB22A853D1800017B54 /* NetworkRepository.swift in Sources */,
+				4631E30A2A84CA8C008A32C2 /* RoomView.swift in Sources */,
+				464A53052A8B4323003CAC89 /* BoardState+Move.swift in Sources */,
+				464A52FE2A8B2EC3003CAC89 /* FenParser.swift in Sources */,
 				46C280642A82278900CE1DF5 /* Move.swift in Sources */,
 				46C2805E2A821E1C00CE1DF5 /* AppView.swift in Sources */,
 			);
@@ -435,6 +511,65 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4631E2F02A84C421008A32C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4631E2F12A84C422008A32C2 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4631E2F02A84C421008A32C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		4631E2F32A84C422008A32C2 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4631E2F02A84C421008A32C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		4631E2F52A84C422008A32C2 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4631E2F02A84C421008A32C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		4631E2F72A84C422008A32C2 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4631E2F02A84C421008A32C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		4631E2F92A84C422008A32C2 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4631E2F02A84C421008A32C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		4631E2FB2A84C422008A32C2 /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4631E2F02A84C421008A32C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
+		};
+		4631E2FD2A84C422008A32C2 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4631E2F02A84C421008A32C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		4631E2FF2A84C422008A32C2 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4631E2F02A84C421008A32C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		4631E3012A84C422008A32C2 /* FirebaseRemoteConfigSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4631E2F02A84C421008A32C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfigSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 46C280442A82185000CE1DF5 /* Project object */;
 }

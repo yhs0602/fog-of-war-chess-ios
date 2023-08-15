@@ -17,16 +17,40 @@ struct AppView: View {
                     .padding(4)
                 Spacer()
                     .frame(height: 70)
-                NavigationLink(destination: ContentView()) {
-                    Text("Start!")
+                NavigationLink(destination: InGameView()) {
+                    Text("SinglePlayer")
                         .frame(width: 100)
                         .padding(6)
                         .overlay(RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color.accentColor, lineWidth: 4))
+                        .stroke(Color.accentColor, lineWidth: 4))
+                }
+                NavigationLink(destination: TurnCoverView(
+                    color: "white",
+                    shouldReset: true
+                )) {
+                    Text("Pass And Play")
+                        .frame(width: 100)
+                        .padding(6)
+                        .overlay(RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.accentColor, lineWidth: 4))
+                }
+                NavigationLink(destination: WaitingRoomView()) {
+                    Text("Create a room")
+                        .frame(width: 100)
+                        .padding(6)
+                        .overlay(RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.accentColor, lineWidth: 4))
+                }
+                NavigationLink(destination: EnterRoomView()) {
+                    Text("Enter a room")
+                        .frame(width: 100)
+                        .padding(6)
+                        .overlay(RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.accentColor, lineWidth: 4))
                 }
             }
         }
-        .ignoresSafeArea()
+            .ignoresSafeArea()
     }
 }
 

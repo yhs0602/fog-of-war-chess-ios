@@ -45,8 +45,8 @@ struct CellView: View {
     }
 }
 
-struct ContentView: View {
-    @StateObject private var viewModel = ContentViewModel()
+struct InGameView: View {
+    @StateObject private var viewModel = InGameViewModel()
 
     var chessBoard: some View {
         GeometryReader { geometry in
@@ -110,6 +110,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        InGameView()
     }
 }

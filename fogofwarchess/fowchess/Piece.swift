@@ -12,7 +12,7 @@ enum ChessPieceType: String {
 
     var shortName: Character {
         switch self {
-        case .pawn: return " "
+        case .pawn: return "P"
         case .rook: return "R"
         case .knight: return "N"
         case .bishop: return "B"
@@ -53,19 +53,31 @@ enum ChessPieceType: String {
         case .king: return "klt"
         }
     }
+
+    static func fromShortName(_ shortName: Character) -> ChessPieceType? {
+        switch shortName {
+        case "P": return .pawn
+        case "R": return .rook
+        case "N": return .knight
+        case "B": return .bishop
+        case "Q": return .queen
+        case "K": return .king
+        default: return nil
+        }
+    }
 }
 
-class ChessPiece: CustomStringConvertible {
+class ChessPiece: CustomStringConvertible, Hashable {
     let type: ChessPieceType
     let color: ChessColor
     // Coordinates managed by the Board
-    var pos: Coord
-    var moved: Bool
-    var row: Int {
-        return pos.row
+    let pos: Coord
+    let moved: Bool
+    var rank: Int {
+        return pos.rank
     }
-    var column: Int {
-        return pos.column
+    var file: Int {
+        return pos.file
     }
 
     var image: String {
@@ -83,7 +95,33 @@ class ChessPiece: CustomStringConvertible {
         self.moved = moved
     }
 
+    init(pieceChar: Character, coord: Coord) {
+        self.pos = coord
+        if(pieceChar.isUppercase) {
+            self.color = .white
+        } else {
+            self.color = .black
+        }
+        self.type = ChessPieceType.fromShortName(Character(String(pieceChar).uppercased())) ?? .pawn
+        self.moved = false
+    }
+
+
     var description: String {
         return "\(color) \(type) at \(pos.coordCode)"
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(type)
+        hasher.combine(color)
+        hasher.combine(pos)
+        hasher.combine(moved)
+    }
+
+    static func == (lhs: ChessPiece, rhs: ChessPiece) -> Bool {
+        return lhs.type == rhs.type &&
+            lhs.color == rhs.color &&
+            lhs.pos == rhs.pos &&
+            lhs.moved == rhs.moved
     }
 }
