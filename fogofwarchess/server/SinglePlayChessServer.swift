@@ -9,6 +9,12 @@ import Foundation
 import Combine
 
 class SinglePlayChessServer: ChessServer {
+    static let shared = SinglePlayChessServer()
+
+    private init() {
+
+    }
+
     var board: BoardState = FenParser(fenStr: BoardState.DefaultFen, fowMark: "U").parse()
     var _fen: CurrentValueSubject<String, Never> = CurrentValueSubject<String, Never>(BoardState.DefaultFen)
     var _possibleMoves: CurrentValueSubject<[ChessPiece: [Move]], Never> = CurrentValueSubject<[ChessPiece: [Move]], Never>([:])

@@ -67,6 +67,9 @@ struct InGameView: View {
 //                Button("Reset") {
 //                    viewModel.reset()
 //                }
+                NavigationLink(destination: TurnCoverView(color: board.turn, shouldReset: false)) {
+                    Text("Next Turn")
+                }
             }
         }.border(.black)
             .confirmationDialog("Select a color", isPresented: Binding<Bool>(

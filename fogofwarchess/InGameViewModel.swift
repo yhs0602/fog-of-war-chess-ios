@@ -40,11 +40,11 @@ class InGameViewModel: ObservableObject {
         self.roomId = roomId
         switch serverType {
         case .singlePlay:
-            server = SinglePlayChessServer()
+            server = SinglePlayChessServer.shared
         case .passNPlay:
-            server = PassNPlayChessServer()
+            server = PassNPlayChessServer.shared
         case .remote:
-            server = RemoteChessServer()
+            server = RemoteChessServer.shared
         }
         bindOutputs()
         setupAudioPlayer()

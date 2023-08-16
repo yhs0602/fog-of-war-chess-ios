@@ -9,6 +9,11 @@ import Foundation
 import Combine
 
 class RemoteChessServer: ChessServer {
+    static let shared = RemoteChessServer()
+
+    private init() {
+
+    }
 
     var board: BoardState = FenParser(fenStr: BoardState.DefaultFen, fowMark: "U").parse()
 

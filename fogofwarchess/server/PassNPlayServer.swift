@@ -9,6 +9,11 @@ import Foundation
 import Combine
 
 class PassNPlayChessServer: ChessServer {
+    static let shared = PassNPlayChessServer()
+
+    private init() {
+
+    }
 
     var board: BoardState = FenParser(fenStr: BoardState.DefaultFen, fowMark: "U").parse()
 
