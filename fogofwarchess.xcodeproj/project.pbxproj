@@ -57,6 +57,13 @@
 		46C280852A83403800CE1DF5 /* pdt.png in Resources */ = {isa = PBXBuildFile; fileRef = 46C280792A83403700CE1DF5 /* pdt.png */; };
 		46C280862A83403800CE1DF5 /* qlt.png in Resources */ = {isa = PBXBuildFile; fileRef = 46C2807A2A83403800CE1DF5 /* qlt.png */; };
 		46C280882A83406600CE1DF5 /* chess_pieces_images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C280872A83406600CE1DF5 /* chess_pieces_images.xcassets */; };
+		46F529602A8C54CA0035A2C8 /* CreateRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F5295F2A8C54CA0035A2C8 /* CreateRoomViewModel.swift */; };
+		46F529622A8C5B250035A2C8 /* AppDelegate+UNUserNotificationCenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F529612A8C5B250035A2C8 /* AppDelegate+UNUserNotificationCenterDelegate.swift */; };
+		46F529652A8C5FDC0035A2C8 /* UserDefaults+Flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F529642A8C5FDC0035A2C8 /* UserDefaults+Flow.swift */; };
+		46F529672A8C6CD60035A2C8 /* FetchFCMToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F529662A8C6CD60035A2C8 /* FetchFCMToken.swift */; };
+		46F5296A2A8D12070035A2C8 /* ChessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F529692A8D12070035A2C8 /* ChessService.swift */; };
+		46F5296C2A8D12220035A2C8 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F5296B2A8D12220035A2C8 /* Models.swift */; };
+		46F5296E2A8D12640035A2C8 /* ChessServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F5296D2A8D12640035A2C8 /* ChessServiceImpl.swift */; };
 		46F60DB22A853D1800017B54 /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F60DB12A853D1800017B54 /* NetworkRepository.swift */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +110,14 @@
 		46C280792A83403700CE1DF5 /* pdt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pdt.png; sourceTree = "<group>"; };
 		46C2807A2A83403800CE1DF5 /* qlt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qlt.png; sourceTree = "<group>"; };
 		46C280872A83406600CE1DF5 /* chess_pieces_images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = chess_pieces_images.xcassets; sourceTree = "<group>"; };
+		46F5295F2A8C54CA0035A2C8 /* CreateRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewModel.swift; sourceTree = "<group>"; };
+		46F529612A8C5B250035A2C8 /* AppDelegate+UNUserNotificationCenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+UNUserNotificationCenterDelegate.swift"; sourceTree = "<group>"; };
+		46F529632A8C5CA00035A2C8 /* fogofwarchess.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = fogofwarchess.entitlements; sourceTree = "<group>"; };
+		46F529642A8C5FDC0035A2C8 /* UserDefaults+Flow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Flow.swift"; sourceTree = "<group>"; };
+		46F529662A8C6CD60035A2C8 /* FetchFCMToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchFCMToken.swift; sourceTree = "<group>"; };
+		46F529692A8D12070035A2C8 /* ChessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessService.swift; sourceTree = "<group>"; };
+		46F5296B2A8D12220035A2C8 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		46F5296D2A8D12640035A2C8 /* ChessServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessServiceImpl.swift; sourceTree = "<group>"; };
 		46F60DB12A853D1800017B54 /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,6 +144,7 @@
 		464A53012A8B3404003CAC89 /* fowchess */ = {
 			isa = PBXGroup;
 			children = (
+				46C2806B2A83264200CE1DF5 /* ChessColor.swift */,
 				46C280672A8233CE00CE1DF5 /* Coord.swift */,
 				46C280632A82278900CE1DF5 /* Move.swift */,
 				464A52FD2A8B2EC3003CAC89 /* FenParser.swift */,
@@ -184,6 +200,8 @@
 		46C2804E2A82185000CE1DF5 /* fogofwarchess */ = {
 			isa = PBXGroup;
 			children = (
+				46F529682A8D11FC0035A2C8 /* network */,
+				46F529632A8C5CA00035A2C8 /* fogofwarchess.entitlements */,
 				464A53062A8B45F5003CAC89 /* server */,
 				464A53012A8B3404003CAC89 /* fowchess */,
 				4631E3032A84C606008A32C2 /* AppDelegate.swift */,
@@ -197,12 +215,15 @@
 				46C280532A82185100CE1DF5 /* Assets.xcassets */,
 				46C280552A82185100CE1DF5 /* Preview Content */,
 				46C2806D2A83348A00CE1DF5 /* Move+Pgn.swift */,
-				46C2806B2A83264200CE1DF5 /* ChessColor.swift */,
 				4631E3052A84C987008A32C2 /* WaitingRoomView.swift */,
 				4631E3072A84C9A8008A32C2 /* EnterRoomView.swift */,
 				4631E3092A84CA8C008A32C2 /* RoomView.swift */,
 				46F60DB12A853D1800017B54 /* NetworkRepository.swift */,
 				464A52FB2A8B1AAD003CAC89 /* TurnCoverView.swift */,
+				46F5295F2A8C54CA0035A2C8 /* CreateRoomViewModel.swift */,
+				46F529612A8C5B250035A2C8 /* AppDelegate+UNUserNotificationCenterDelegate.swift */,
+				46F529642A8C5FDC0035A2C8 /* UserDefaults+Flow.swift */,
+				46F529662A8C6CD60035A2C8 /* FetchFCMToken.swift */,
 			);
 			path = fogofwarchess;
 			sourceTree = "<group>";
@@ -213,6 +234,16 @@
 				46C280562A82185100CE1DF5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		46F529682A8D11FC0035A2C8 /* network */ = {
+			isa = PBXGroup;
+			children = (
+				46F529692A8D12070035A2C8 /* ChessService.swift */,
+				46F5296B2A8D12220035A2C8 /* Models.swift */,
+				46F5296D2A8D12640035A2C8 /* ChessServiceImpl.swift */,
+			);
+			path = network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,18 +351,25 @@
 				46C2806C2A83264200CE1DF5 /* ChessColor.swift in Sources */,
 				46C280602A82267D00CE1DF5 /* Piece.swift in Sources */,
 				46C280522A82185000CE1DF5 /* InGameView.swift in Sources */,
+				46F529652A8C5FDC0035A2C8 /* UserDefaults+Flow.swift in Sources */,
 				464A52FC2A8B1AAD003CAC89 /* TurnCoverView.swift in Sources */,
 				4631E3062A84C987008A32C2 /* WaitingRoomView.swift in Sources */,
 				464A53002A8B2F2D003CAC89 /* BoardState.swift in Sources */,
+				46F5296C2A8D12220035A2C8 /* Models.swift in Sources */,
 				4631E3082A84C9A8008A32C2 /* EnterRoomView.swift in Sources */,
+				46F5296A2A8D12070035A2C8 /* ChessService.swift in Sources */,
 				46C280662A8227E400CE1DF5 /* InGameViewModel.swift in Sources */,
 				46C2806E2A83348A00CE1DF5 /* Move+Pgn.swift in Sources */,
 				464A53102A8B5900003CAC89 /* RemoteChessServer.swift in Sources */,
 				464A53032A8B3C94003CAC89 /* BoardState+PawnMove.swift in Sources */,
 				46C280502A82185000CE1DF5 /* fogofwarchessApp.swift in Sources */,
+				46F529672A8C6CD60035A2C8 /* FetchFCMToken.swift in Sources */,
+				46F529602A8C54CA0035A2C8 /* CreateRoomViewModel.swift in Sources */,
+				46F529622A8C5B250035A2C8 /* AppDelegate+UNUserNotificationCenterDelegate.swift in Sources */,
 				46C280682A8233CE00CE1DF5 /* Coord.swift in Sources */,
 				464A53082A8B4600003CAC89 /* ChessServer.swift in Sources */,
 				46F60DB22A853D1800017B54 /* NetworkRepository.swift in Sources */,
+				46F5296E2A8D12640035A2C8 /* ChessServiceImpl.swift in Sources */,
 				4631E30A2A84CA8C008A32C2 /* RoomView.swift in Sources */,
 				464A53052A8B4323003CAC89 /* BoardState+Move.swift in Sources */,
 				464A52FE2A8B2EC3003CAC89 /* FenParser.swift in Sources */,
@@ -464,6 +502,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = fogofwarchess/fogofwarchess.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"fogofwarchess/Preview Content\"";
@@ -493,6 +532,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = fogofwarchess/fogofwarchess.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"fogofwarchess/Preview Content\"";
