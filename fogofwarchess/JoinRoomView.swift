@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct EnterRoomView: View {
-    @State private var roomId: String = ""
-    @State private var navigateToRoom = false
+    @ObservedObject var viewModel = JoinRoomViewModel()
 
     var body: some View {
         VStack(spacing: 20) {
             Text("Enter Room ID:")
-            TextField("Enter your room ID", text: $roomId)
+            TextField("Enter your room ID", text: $viewModel.roomId)
                 .padding()
                 .border(Color.gray, width: 1)
             Button("Enter!") {
-                navigateToRoom = true
-            }
+                viewModel.joinRoom()
+//                navigateToRoom = true
+            }.disabled(!viewModel.canJoinRoom)
             Spacer()
         }.padding()
-            .navigationDestination(isPresented: $navigateToRoom) {
-                RoomView(roomId: roomId)
-            }
+//            .navigationDestination(isPresented: $navigateToRoom) {
+//                InGameView(color: .white, shouldReset: true, serverType: .remote)
+//            }
     }
 }
 

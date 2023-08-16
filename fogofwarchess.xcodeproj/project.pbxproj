@@ -20,9 +20,8 @@
 		4631E3002A84C422008A32C2 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 4631E2FF2A84C422008A32C2 /* FirebaseRemoteConfig */; };
 		4631E3022A84C422008A32C2 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4631E3012A84C422008A32C2 /* FirebaseRemoteConfigSwift */; };
 		4631E3042A84C606008A32C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4631E3032A84C606008A32C2 /* AppDelegate.swift */; };
-		4631E3062A84C987008A32C2 /* WaitingRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4631E3052A84C987008A32C2 /* WaitingRoomView.swift */; };
-		4631E3082A84C9A8008A32C2 /* EnterRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4631E3072A84C9A8008A32C2 /* EnterRoomView.swift */; };
-		4631E30A2A84CA8C008A32C2 /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4631E3092A84CA8C008A32C2 /* RoomView.swift */; };
+		4631E3062A84C987008A32C2 /* CreateRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4631E3052A84C987008A32C2 /* CreateRoomView.swift */; };
+		4631E3082A84C9A8008A32C2 /* JoinRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4631E3072A84C9A8008A32C2 /* JoinRoomView.swift */; };
 		464A52FC2A8B1AAD003CAC89 /* TurnCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464A52FB2A8B1AAD003CAC89 /* TurnCoverView.swift */; };
 		464A52FE2A8B2EC3003CAC89 /* FenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464A52FD2A8B2EC3003CAC89 /* FenParser.swift */; };
 		464A53002A8B2F2D003CAC89 /* BoardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464A52FF2A8B2F2D003CAC89 /* BoardState.swift */; };
@@ -68,7 +67,7 @@
 		46F529732A8D16620035A2C8 /* MoyaProvider+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F529722A8D16620035A2C8 /* MoyaProvider+Async.swift */; };
 		46F529752A8D16FC0035A2C8 /* ChessAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F529742A8D16FC0035A2C8 /* ChessAPI.swift */; };
 		46F529772A8D1C430035A2C8 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F529762A8D1C430035A2C8 /* ActivityViewController.swift */; };
-		46F60DB22A853D1800017B54 /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F60DB12A853D1800017B54 /* NetworkRepository.swift */; };
+		46F529792A8D1D1A0035A2C8 /* JoinRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F529782A8D1D1A0035A2C8 /* JoinRoomViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,9 +75,8 @@
 		463184E62A83E34C00C6ABF6 /* drop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = drop.mp3; sourceTree = "<group>"; };
 		4631E2EE2A84C323008A32C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4631E3032A84C606008A32C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4631E3052A84C987008A32C2 /* WaitingRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomView.swift; sourceTree = "<group>"; };
-		4631E3072A84C9A8008A32C2 /* EnterRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomView.swift; sourceTree = "<group>"; };
-		4631E3092A84CA8C008A32C2 /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
+		4631E3052A84C987008A32C2 /* CreateRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomView.swift; sourceTree = "<group>"; };
+		4631E3072A84C9A8008A32C2 /* JoinRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomView.swift; sourceTree = "<group>"; };
 		464A52FB2A8B1AAD003CAC89 /* TurnCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnCoverView.swift; sourceTree = "<group>"; };
 		464A52FD2A8B2EC3003CAC89 /* FenParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FenParser.swift; sourceTree = "<group>"; };
 		464A52FF2A8B2F2D003CAC89 /* BoardState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardState.swift; sourceTree = "<group>"; };
@@ -125,7 +123,7 @@
 		46F529722A8D16620035A2C8 /* MoyaProvider+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoyaProvider+Async.swift"; sourceTree = "<group>"; };
 		46F529742A8D16FC0035A2C8 /* ChessAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessAPI.swift; sourceTree = "<group>"; };
 		46F529762A8D1C430035A2C8 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
-		46F60DB12A853D1800017B54 /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
+		46F529782A8D1D1A0035A2C8 /* JoinRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +150,7 @@
 		464A53012A8B3404003CAC89 /* fowchess */ = {
 			isa = PBXGroup;
 			children = (
+				46C2806D2A83348A00CE1DF5 /* Move+Pgn.swift */,
 				46C2806B2A83264200CE1DF5 /* ChessColor.swift */,
 				46C280672A8233CE00CE1DF5 /* Coord.swift */,
 				46C280632A82278900CE1DF5 /* Move.swift */,
@@ -208,27 +207,25 @@
 		46C2804E2A82185000CE1DF5 /* fogofwarchess */ = {
 			isa = PBXGroup;
 			children = (
-				46F529682A8D11FC0035A2C8 /* network */,
+				46C280532A82185100CE1DF5 /* Assets.xcassets */,
+				463184E62A83E34C00C6ABF6 /* drop.mp3 */,
+				463184E52A83E34C00C6ABF6 /* place.mp3 */,
 				46F529632A8C5CA00035A2C8 /* fogofwarchess.entitlements */,
+				46C280552A82185100CE1DF5 /* Preview Content */,
+				46F529682A8D11FC0035A2C8 /* network */,
 				464A53062A8B45F5003CAC89 /* server */,
 				464A53012A8B3404003CAC89 /* fowchess */,
 				4631E3032A84C606008A32C2 /* AppDelegate.swift */,
 				4631E2EE2A84C323008A32C2 /* GoogleService-Info.plist */,
-				463184E62A83E34C00C6ABF6 /* drop.mp3 */,
-				463184E52A83E34C00C6ABF6 /* place.mp3 */,
 				46C2805D2A821E1C00CE1DF5 /* AppView.swift */,
 				46C2804F2A82185000CE1DF5 /* fogofwarchessApp.swift */,
 				46C280512A82185000CE1DF5 /* InGameView.swift */,
 				46C280652A8227E400CE1DF5 /* InGameViewModel.swift */,
-				46C280532A82185100CE1DF5 /* Assets.xcassets */,
-				46C280552A82185100CE1DF5 /* Preview Content */,
-				46C2806D2A83348A00CE1DF5 /* Move+Pgn.swift */,
-				4631E3052A84C987008A32C2 /* WaitingRoomView.swift */,
-				4631E3072A84C9A8008A32C2 /* EnterRoomView.swift */,
-				4631E3092A84CA8C008A32C2 /* RoomView.swift */,
-				46F60DB12A853D1800017B54 /* NetworkRepository.swift */,
-				464A52FB2A8B1AAD003CAC89 /* TurnCoverView.swift */,
+				4631E3072A84C9A8008A32C2 /* JoinRoomView.swift */,
+				46F529782A8D1D1A0035A2C8 /* JoinRoomViewModel.swift */,
+				4631E3052A84C987008A32C2 /* CreateRoomView.swift */,
 				46F5295F2A8C54CA0035A2C8 /* CreateRoomViewModel.swift */,
+				464A52FB2A8B1AAD003CAC89 /* TurnCoverView.swift */,
 				46F529612A8C5B250035A2C8 /* AppDelegate+UNUserNotificationCenterDelegate.swift */,
 				46F529642A8C5FDC0035A2C8 /* UserDefaults+Flow.swift */,
 				46F529662A8C6CD60035A2C8 /* FetchFCMToken.swift */,
@@ -366,10 +363,10 @@
 				46C280522A82185000CE1DF5 /* InGameView.swift in Sources */,
 				46F529652A8C5FDC0035A2C8 /* UserDefaults+Flow.swift in Sources */,
 				464A52FC2A8B1AAD003CAC89 /* TurnCoverView.swift in Sources */,
-				4631E3062A84C987008A32C2 /* WaitingRoomView.swift in Sources */,
+				4631E3062A84C987008A32C2 /* CreateRoomView.swift in Sources */,
 				464A53002A8B2F2D003CAC89 /* BoardState.swift in Sources */,
 				46F5296C2A8D12220035A2C8 /* Models.swift in Sources */,
-				4631E3082A84C9A8008A32C2 /* EnterRoomView.swift in Sources */,
+				4631E3082A84C9A8008A32C2 /* JoinRoomView.swift in Sources */,
 				46F5296A2A8D12070035A2C8 /* ChessService.swift in Sources */,
 				46C280662A8227E400CE1DF5 /* InGameViewModel.swift in Sources */,
 				46C2806E2A83348A00CE1DF5 /* Move+Pgn.swift in Sources */,
@@ -382,9 +379,8 @@
 				46C280682A8233CE00CE1DF5 /* Coord.swift in Sources */,
 				46F529772A8D1C430035A2C8 /* ActivityViewController.swift in Sources */,
 				464A53082A8B4600003CAC89 /* ChessServer.swift in Sources */,
-				46F60DB22A853D1800017B54 /* NetworkRepository.swift in Sources */,
+				46F529792A8D1D1A0035A2C8 /* JoinRoomViewModel.swift in Sources */,
 				46F5296E2A8D12640035A2C8 /* ChessServiceImpl.swift in Sources */,
-				4631E30A2A84CA8C008A32C2 /* RoomView.swift in Sources */,
 				464A53052A8B4323003CAC89 /* BoardState+Move.swift in Sources */,
 				464A52FE2A8B2EC3003CAC89 /* FenParser.swift in Sources */,
 				46C280642A82278900CE1DF5 /* Move.swift in Sources */,
