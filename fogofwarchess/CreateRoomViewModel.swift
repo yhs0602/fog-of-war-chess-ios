@@ -12,16 +12,29 @@ class CreateRoomViewModel: ObservableObject {
     @Published private var fcmToken: String? = UserDefaults.standard.fcmToken
     @Published var isWhite: Bool = true
     @Published var roomId: String = ""
+    @Published var canCreateRoom: Bool = false
 
     var cancellables = Set<AnyCancellable>()
 
-    var canCreateRoom: AnyPublisher<Bool, Never> {
+    var canCreateRoomPublisher: AnyPublisher<Bool, Never> {
         return $fcmToken
             .map { $0 != nil }
             .eraseToAnyPublisher()
     }
 
+    init() {
+        bindOutputs()
+    }
+
+    func bindOutputs() {
+        canCreateRoomPublisher
+            .receive(on: RunLoop.main)
+            .assign(to: \.canCreateRoom, on: self)
+            .store(in: &cancellables)
+    }
+
     func prepareCreateRoom() {
+        print("prepareCreateRoom called")
         if fcmToken == nil {
             Task {
                 do {
@@ -48,7 +61,7 @@ class CreateRoomViewModel: ObservableObject {
             await MainActor.run {
                 self.roomId = roomData.roomId
             }
-            UserDefaults.standard.set(roomData.token, forKey: "RoomToken")
+            UserDefaults.standard.roomToken = roomData.token
         }
     }
 }

@@ -6,43 +6,54 @@
 //
 
 import Foundation
+import Moya
 
 class ChessServiceImpl: ChessService {
+    private init() {
+    }
+
+    let provider = MoyaProvider<ChessAPI>()
+
     func joinRoom(data: JoinRoomData) async throws -> GeneratedRoomInfo {
-        <#code#>
+        let result = await provider.request(.joinRoom(data: data))
+        switch result {
+        case .success(let response):
+            let roomInfo = try JSONDecoder().decode(GeneratedRoomInfo.self, from: response.data)
+            print("Received room info: \(roomInfo)")
+            return roomInfo
+        case .failure(let error):
+            print("Error calling the API: \(error)")
+            throw error
+        }
     }
 
-    func applyMove(data: MoveData, token: String) async throws -> BoardState {
-        <#code#>
-    }
-
-
-    let baseURL = URL(string: "https://prod-y6lhqx6yia-du.a.run.app/")!
-    let session: URLSession
-
-    init(session: URLSession = .shared) {
-        self.session = session
+    func applyMove(data: MoveData, token: String) async throws -> BoardStateData {
+        let result = await provider.request(.applyMove(data: data, token: token))
+        switch result {
+        case .success(let response):
+            let boardState = try JSONDecoder().decode(BoardStateData.self, from: response.data)
+            print("Received room info: \(boardState)")
+            return boardState
+        case .failure(let error):
+            print("Error calling the API: \(error)")
+            throw error
+        }
     }
 
     func createRoom(data: CreateRoomData) async throws -> GeneratedRoomInfo {
-        let url = baseURL.appendingPathComponent("create-room")
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        let jsonData = try JSONEncoder().encode(data)
-        request.httpBody = jsonData
-
-        let (data, _) = try await session.data(for: request)
-        let result = try JSONDecoder().decode(GeneratedRoomInfo.self, from: data)
-
-        return result
+        let result = await provider.request(.createRoom(data: data))
+        switch result {
+        case .success(let response):
+            let roomInfo = try JSONDecoder().decode(GeneratedRoomInfo.self, from: response.data)
+            print("Received room info: \(roomInfo)")
+            return roomInfo
+        case .failure(let error):
+            print("Error calling the API: \(error)")
+            throw error
+        }
     }
-
-    // ... similarly for other methods
 }
 
 extension ChessServiceImpl {
-    static let shared: ChessService = ChessServiceImpl(session: .shared)
+    static let shared: ChessService = ChessServiceImpl()
 }
-

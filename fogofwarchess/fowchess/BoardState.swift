@@ -234,8 +234,8 @@ struct BoardState {
 
     func toFowBoard(color: ChessColor) -> BoardState {
         print("toFowBoard \(color.rawValue)")
-        var newPieces = pieces
-        var newCastling = castling
+        let newPieces = pieces // TODO: Hide castling rights of the opponent
+        let newCastling = castling
         // Get possible moves to get sight
         let possibleMoves = getLegalMoves(color: color)
         print("getLegalMoves \(color.rawValue)")

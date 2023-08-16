@@ -64,6 +64,10 @@
 		46F5296A2A8D12070035A2C8 /* ChessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F529692A8D12070035A2C8 /* ChessService.swift */; };
 		46F5296C2A8D12220035A2C8 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F5296B2A8D12220035A2C8 /* Models.swift */; };
 		46F5296E2A8D12640035A2C8 /* ChessServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F5296D2A8D12640035A2C8 /* ChessServiceImpl.swift */; };
+		46F529712A8D164E0035A2C8 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 46F529702A8D164E0035A2C8 /* Moya */; };
+		46F529732A8D16620035A2C8 /* MoyaProvider+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F529722A8D16620035A2C8 /* MoyaProvider+Async.swift */; };
+		46F529752A8D16FC0035A2C8 /* ChessAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F529742A8D16FC0035A2C8 /* ChessAPI.swift */; };
+		46F529772A8D1C430035A2C8 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F529762A8D1C430035A2C8 /* ActivityViewController.swift */; };
 		46F60DB22A853D1800017B54 /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F60DB12A853D1800017B54 /* NetworkRepository.swift */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +122,9 @@
 		46F529692A8D12070035A2C8 /* ChessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessService.swift; sourceTree = "<group>"; };
 		46F5296B2A8D12220035A2C8 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		46F5296D2A8D12640035A2C8 /* ChessServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessServiceImpl.swift; sourceTree = "<group>"; };
+		46F529722A8D16620035A2C8 /* MoyaProvider+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoyaProvider+Async.swift"; sourceTree = "<group>"; };
+		46F529742A8D16FC0035A2C8 /* ChessAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessAPI.swift; sourceTree = "<group>"; };
+		46F529762A8D1C430035A2C8 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		46F60DB12A853D1800017B54 /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,6 +141,7 @@
 				4631E2F82A84C422008A32C2 /* FirebaseCrashlytics in Frameworks */,
 				4631E2F62A84C422008A32C2 /* FirebaseAuth in Frameworks */,
 				4631E2F42A84C422008A32C2 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				46F529712A8D164E0035A2C8 /* Moya in Frameworks */,
 				4631E3002A84C422008A32C2 /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -224,6 +232,7 @@
 				46F529612A8C5B250035A2C8 /* AppDelegate+UNUserNotificationCenterDelegate.swift */,
 				46F529642A8C5FDC0035A2C8 /* UserDefaults+Flow.swift */,
 				46F529662A8C6CD60035A2C8 /* FetchFCMToken.swift */,
+				46F529762A8D1C430035A2C8 /* ActivityViewController.swift */,
 			);
 			path = fogofwarchess;
 			sourceTree = "<group>";
@@ -242,6 +251,8 @@
 				46F529692A8D12070035A2C8 /* ChessService.swift */,
 				46F5296B2A8D12220035A2C8 /* Models.swift */,
 				46F5296D2A8D12640035A2C8 /* ChessServiceImpl.swift */,
+				46F529722A8D16620035A2C8 /* MoyaProvider+Async.swift */,
+				46F529742A8D16FC0035A2C8 /* ChessAPI.swift */,
 			);
 			path = network;
 			sourceTree = "<group>";
@@ -272,6 +283,7 @@
 				4631E2FD2A84C422008A32C2 /* FirebaseMessaging */,
 				4631E2FF2A84C422008A32C2 /* FirebaseRemoteConfig */,
 				4631E3012A84C422008A32C2 /* FirebaseRemoteConfigSwift */,
+				46F529702A8D164E0035A2C8 /* Moya */,
 			);
 			productName = fogofwarchess;
 			productReference = 46C2804C2A82185000CE1DF5 /* fogofwarchess.app */;
@@ -303,6 +315,7 @@
 			mainGroup = 46C280432A82185000CE1DF5;
 			packageReferences = (
 				4631E2F02A84C421008A32C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				46F5296F2A8D164E0035A2C8 /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = 46C2804D2A82185000CE1DF5 /* Products */;
 			projectDirPath = "";
@@ -367,6 +380,7 @@
 				46F529602A8C54CA0035A2C8 /* CreateRoomViewModel.swift in Sources */,
 				46F529622A8C5B250035A2C8 /* AppDelegate+UNUserNotificationCenterDelegate.swift in Sources */,
 				46C280682A8233CE00CE1DF5 /* Coord.swift in Sources */,
+				46F529772A8D1C430035A2C8 /* ActivityViewController.swift in Sources */,
 				464A53082A8B4600003CAC89 /* ChessServer.swift in Sources */,
 				46F60DB22A853D1800017B54 /* NetworkRepository.swift in Sources */,
 				46F5296E2A8D12640035A2C8 /* ChessServiceImpl.swift in Sources */,
@@ -375,8 +389,10 @@
 				464A52FE2A8B2EC3003CAC89 /* FenParser.swift in Sources */,
 				46C280642A82278900CE1DF5 /* Move.swift in Sources */,
 				464A530E2A8B4E60003CAC89 /* SinglePlayChessServer.swift in Sources */,
+				46F529732A8D16620035A2C8 /* MoyaProvider+Async.swift in Sources */,
 				46C2805E2A821E1C00CE1DF5 /* AppView.swift in Sources */,
 				464A530A2A8B4734003CAC89 /* PassNPlayServer.swift in Sources */,
+				46F529752A8D16FC0035A2C8 /* ChessAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,6 +605,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		46F5296F2A8D164E0035A2C8 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -636,6 +660,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4631E2F02A84C421008A32C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfigSwift;
+		};
+		46F529702A8D164E0035A2C8 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46F5296F2A8D164E0035A2C8 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct WaitingRoomView: View {
-    @ObservedObject var viewModel =  CreateRoomViewModel()
-    @State private var isWhite: Bool = true
+    @ObservedObject var viewModel = CreateRoomViewModel()
+    @State private var isShareSheetPresented: Bool = false
 
     var body: some View {
         NavigationView {
@@ -28,11 +28,13 @@ struct WaitingRoomView: View {
                         .frame(maxWidth: .infinity)
 
                     Button("Copy") {
-                        // TODO: Copy room number to clipboard
+                        UIPasteboard.general.string = viewModel.roomId
                     }
 
                     Button("Share") {
-                        // TODO: Share room number
+                        isShareSheetPresented.toggle()
+                    }.sheet(isPresented: $isShareSheetPresented) {
+                        ActivityViewController(activityItems: [viewModel.roomId])
                     }
                 }
             }

@@ -10,6 +10,7 @@ import Combine
 
 extension UserDefaults {
     static let fcmTokenKey = "FCM_TOKEN"
+    static let roomTokenKey = "ROOM_TOKEN"
 
     var fcmTokenPublisher: AnyPublisher<String?, Never> {
         return self.publisher(for: \.fcmToken)
@@ -22,6 +23,15 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: UserDefaults.fcmTokenKey)
+        }
+    }
+
+    @objc dynamic var roomToken: String? {
+        get {
+            return string(forKey: UserDefaults.roomTokenKey)
+        }
+        set {
+            set(newValue, forKey: UserDefaults.roomTokenKey)
         }
     }
 }
