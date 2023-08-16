@@ -59,6 +59,7 @@ class JoinRoomViewModel: ObservableObject {
                 )
             )
             UserDefaults.standard.roomToken = roomData.token
+            print("Joined room: \(roomData.token)")
             // TODO: Navigate to the game screen
         }
     }
