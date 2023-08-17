@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TurnCoverView: View {
     @State private var isNavigating = false
+    @EnvironmentObject var navigationState: NavigationStateManager
 
     let color: ChessColor
     let shouldReset: Bool
@@ -34,6 +35,9 @@ struct TurnCoverView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(color == .black ? Color.black : Color.white)
             .navigationBarBackButtonHidden(true) // Hide back button for view2
+            .onAppear {
+                self.navigationState.currentView = .turnCover
+            }
     }
 }
 

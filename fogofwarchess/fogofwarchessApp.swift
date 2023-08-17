@@ -10,10 +10,12 @@ import SwiftUI
 @main
 struct fogofwarchessApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var navigationState = NavigationStateManager()
 
     var body: some Scene {
         WindowGroup {
             AppView()
+                .environmentObject(navigationState)
         }
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct WaitingRoomView: View {
     @ObservedObject var viewModel = CreateRoomViewModel()
     @State private var isShareSheetPresented: Bool = false
+    @EnvironmentObject var navigationState: NavigationStateManager
 
     var body: some View {
         NavigationView {
@@ -42,6 +43,7 @@ struct WaitingRoomView: View {
         }
             .onAppear {
             viewModel.prepareCreateRoom()
+            self.navigationState.currentView = .createRoom
         }
     }
 }

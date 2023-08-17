@@ -18,6 +18,7 @@ struct InGameView: View {
     let roomId: String?
 
     @StateObject private var viewModel: InGameViewModel
+    @EnvironmentObject var navigationState: NavigationStateManager
 
     init(color: ChessColor?, shouldReset: Bool, serverType: ServerType, roomId: String? = nil) {
         self.color = color
@@ -101,6 +102,7 @@ struct InGameView: View {
                     viewModel.nextTurn()
                 }
             }
+            self.navigationState.currentView = .ingame
         }
     }
 }

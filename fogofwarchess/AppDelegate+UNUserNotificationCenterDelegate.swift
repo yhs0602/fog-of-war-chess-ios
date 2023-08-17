@@ -23,10 +23,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void
     ) {
-        let userInfo = response.notification.request.content.userInfo
+        let userInfo = response.notification.request.content.userInfo as! [String: AnyObject]
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         print(userInfo)
+        NotificationManager.shared.payloadSubject.send(userInfo)
+
         completionHandler()
     }
 }

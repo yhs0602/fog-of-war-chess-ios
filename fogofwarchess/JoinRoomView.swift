@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EnterRoomView: View {
     @ObservedObject var viewModel = JoinRoomViewModel()
+    @EnvironmentObject var navigationState: NavigationStateManager
 
     var body: some View {
         VStack(spacing: 20) {
@@ -22,6 +23,9 @@ struct EnterRoomView: View {
             }.disabled(!viewModel.canJoinRoom)
             Spacer()
         }.padding()
+            .onAppear {
+                self.navigationState.currentView = .joinRoom
+            }
 //            .navigationDestination(isPresented: $navigateToRoom) {
 //                InGameView(color: .white, shouldReset: true, serverType: .remote)
 //            }

@@ -10,9 +10,14 @@ import Combine
 
 class RemoteChessServer: ChessServer {
     static let shared = RemoteChessServer()
+    var cancellables = Set<AnyCancellable>()
 
     private init() {
-
+        NotificationManager.shared.payloadSubject
+            .sink { payload in
+            print("Received Payload: \(payload)")
+        }
+            .store(in: &cancellables)
     }
 
     var board: BoardState = FenParser(fenStr: BoardState.DefaultFen, fowMark: "U").parse()
