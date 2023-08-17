@@ -51,7 +51,7 @@ struct MoveData: Codable {
 
 struct BoardStateData: Codable {
     let board: String
-    let legalMoves: [String]
+    let legalMoves: [MoveData]
     let status: String
     let winner: String?
     let fullMove: Int
@@ -63,4 +63,9 @@ struct BoardStateData: Codable {
         case winner
         case fullMove = "full_move"
     }
+}
+
+struct BoardStateAndMoves {
+    let boardState: BoardState
+    let legalMoves: [MoveData]
 }

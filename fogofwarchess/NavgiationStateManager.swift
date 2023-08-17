@@ -17,5 +17,11 @@ enum NavigationState {
 }
 
 class NavigationStateManager: ObservableObject {
+    static let shared = NavigationStateManager()
+
     @Published var currentView: NavigationState = .main
+
+    private init() {
+
+    }
 }

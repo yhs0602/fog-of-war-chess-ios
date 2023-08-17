@@ -13,5 +13,5 @@ class NotificationManager {
     static let shared = NotificationManager()
     private init() {}
 
-    let payloadSubject = PassthroughSubject<[String: AnyObject], Never>()
+    let payloadSubject = CurrentValueSubject<String, Never>("")
 }

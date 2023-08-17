@@ -51,6 +51,7 @@ class JoinRoomViewModel: ObservableObject {
         guard let fcmToken = self.fcmToken else {
             return
         }
+        RemoteChessServer.shared.resetGame(playerColor: .white)
         Task {
             let roomData = try await ChessServiceImpl.shared.joinRoom(
                 data: JoinRoomData(

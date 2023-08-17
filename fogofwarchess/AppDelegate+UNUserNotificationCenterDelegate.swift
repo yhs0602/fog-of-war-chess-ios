@@ -15,9 +15,24 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
     ) {
         // Change this to your preferred presentation option
-        completionHandler([[.alert, .sound]])
+        let navigationState = NavigationStateManager.shared
+        if navigationState.currentView == .ingame {
+            // handle data message
+            let userInfo = notification.request.content.userInfo as! [String: AnyObject]
+            print("Background ")
+            print(userInfo)
+            if let payload = userInfo["payload"] as? String {
+                NotificationManager.shared.payloadSubject.send(payload)
+            } else {
+                print("the payload was not string")
+            }
+            completionHandler([])
+        } else {
+            completionHandler([[.banner, .sound, .list]]) // banner: even when app is on, .list: list
+        }
     }
 
+    // When the user clicks the notification
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         didReceive response: UNNotificationResponse,
@@ -26,8 +41,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let userInfo = response.notification.request.content.userInfo as! [String: AnyObject]
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         // Messaging.messaging().appDidReceiveMessage(userInfo)
+        print("Noti tapped ")
         print(userInfo)
-        NotificationManager.shared.payloadSubject.send(userInfo)
+        if let payload = userInfo["payload"] as? String {
+            NotificationManager.shared.payloadSubject.send(payload)
+        } else {
+            print("the payload was not string")
+        }
 
         completionHandler()
     }

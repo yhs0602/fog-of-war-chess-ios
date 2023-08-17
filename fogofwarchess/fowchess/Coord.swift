@@ -38,6 +38,18 @@ struct Coord: Hashable {
         self.rank = rank
     }
 
+    init?(san: String) {
+        let lowered = san.lowercased()
+        guard let fileLetter = lowered.first else {
+            return nil
+        }
+        guard let rankNumber = lowered.last else {
+            return nil
+        }
+        self.file = Int(fileLetter.asciiValue! - Character("a").asciiValue! + 1)
+        self.rank = Int(String(rankNumber)) ?? 0
+    }
+
     func isValid() -> Bool {
         return (1...8).contains(file) && (1...8).contains(rank)
     }
