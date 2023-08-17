@@ -48,20 +48,31 @@ class JoinRoomViewModel: ObservableObject {
     }
 
     func joinRoom() {
+        print("JoinRoom")
         guard let fcmToken = self.fcmToken else {
+            print("Fcm token is nil")
             return
         }
-        RemoteChessServer.shared.resetGame(playerColor: .white)
+        RemoteChessServer.shared.resetGame(playerColor: .white) // Just instantiate the Remote Chess server
         Task {
-            let roomData = try await ChessServiceImpl.shared.joinRoom(
-                data: JoinRoomData(
-                    roomId: roomId,
-                    fcmToken: fcmToken
+            do {
+                let roomData = try await ChessServiceImpl.shared.joinRoom(
+                    data: JoinRoomData(
+                        roomId: roomId,
+                        fcmToken: fcmToken
+                    )
                 )
-            )
-            UserDefaults.standard.roomToken = roomData.token
-            print("Joined room: \(roomData.token)")
-            // TODO: Navigate to the game screen
+                print("Will save")
+                UserDefaults.standard.roomToken = roomData.token
+                print("Joined room: \(roomData.token)")
+                // TODO: Navigate to the game screen
+                await MainActor.run {
+                    let navigationManager = NavigationStateManager.shared
+                    navigationManager.shouldNavigateToInGameView = true
+                }
+            } catch {
+                print("error: \(error)")
+            }
         }
     }
 }

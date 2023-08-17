@@ -56,14 +56,13 @@ struct AppView: View {
                         .overlay(RoundedRectangle(cornerRadius: 20)
                         .stroke(Color.accentColor, lineWidth: 4))
                 }
-                NavigationLink(destination: InGameView(
-                    color: .white,
-                    shouldReset: false,
-                    serverType: .remote
-                ), isActive: $navigationState.shouldNavigateToInGameView) {
-                    EmptyView()
-                }
             }
+        }.navigationDestination(isPresented: $navigationState.shouldNavigateToInGameView) {
+            InGameView(
+                color: .white,
+                shouldReset: false,
+                serverType: .remote
+            )
         }
             .ignoresSafeArea()
     }
