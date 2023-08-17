@@ -13,8 +13,10 @@ class RemoteChessServer: ChessServer {
     var cancellables = Set<AnyCancellable>()
     @Published private var roomToken: String? = UserDefaults.standard.roomToken
 
-    private init() {
-        let payloadToBoardStateData = NotificationManager.shared.payloadSubject
+    private let moveResultBoardStatePublisher = PassthroughSubject<BoardStateData, Error>()
+
+    private lazy var payloadToBoardStateData: AnyPublisher<BoardStateData, Error> = {
+        let notificationPayloads = NotificationManager.shared.payloadSubject
             .tryMap { payload in
             guard let data = payload.data(using: .utf8) else {
                 throw NSError(domain: "Invalid payload", code: 0, userInfo: nil)
@@ -23,6 +25,11 @@ class RemoteChessServer: ChessServer {
             return try decoder.decode(BoardStateData.self, from: data)
         }
 
+        return Publishers.Merge(notificationPayloads, moveResultBoardStatePublisher)
+            .eraseToAnyPublisher()
+    }()
+
+    private init() {
         let boardStateAndMoves = payloadToBoardStateData
             .map { boardStateData -> BoardStateAndMoves in
             let boardState = FenParser(fenStr: boardStateData.board, fowMark: "U").parse()
@@ -77,31 +84,26 @@ class RemoteChessServer: ChessServer {
         return _winner.eraseToAnyPublisher()
     }
 
-    func applyMove(move: Move) -> Future<Void, Error> {
-        return Future { [weak self] promise in
-            guard let self else {
-                return
-            }
-            guard let roomToken else {
-                return
-            }
+    func applyMove(move: Move) async {
+        guard let roomToken else {
+            return
+        }
 
-            let moveData = MoveData(
-                fromPosition: move.piece.pos.coordCode,
-                toPosition: move.to.coordCode,
-                promotionPiece: move.promotingTo?.rawValue ?? ""
+        let moveData = MoveData(
+            fromPosition: move.piece.pos.coordCode,
+            toPosition: move.to.coordCode,
+            promotionPiece: move.promotingTo?.rawValue ?? ""
+        )
+        do {
+            let boardStateData = try await ChessServiceImpl.shared.applyMove(
+                data: moveData,
+                token: roomToken
             )
-            Task {
-                do {
-                    let roomData = try await ChessServiceImpl.shared.applyMove(
-                        data: moveData,
-                        token: roomToken
-                    )
-                } catch {
-                    print("Error: \(error)")
-                }
-            }
-            promise(.success(()))
+            // emit the boardStateData to payloadToBoardStateData
+            moveResultBoardStatePublisher.send(boardStateData)
+        } catch {
+            print("Error: \(error)")
+            moveResultBoardStatePublisher.send(completion: .failure(error))
         }
     }
 
@@ -133,7 +135,6 @@ class RemoteChessServer: ChessServer {
                 continue // wrong from position
             }
             let promotingTo = ChessPieceType(rawValue: move.promotionPiece)
-            // TODO: handle capture piece w en passant
             let captureTarget: ChessPiece?
             if let targetPiece = boardState.pieces[toCoord] {
                 // capture
@@ -153,7 +154,6 @@ class RemoteChessServer: ChessServer {
             } else {
                 captureTarget = nil
             }
-            // TODO: handle castling rook
             let dfile = toCoord.file - fromCoord.file
             let castlingRook: ChessPiece?
             if piece.type == .king { // castling

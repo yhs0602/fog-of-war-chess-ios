@@ -58,7 +58,7 @@ class InGameViewModel: ObservableObject {
 
         server.fen
             .map { fen in
-                let board = FenParser(fenStr: fen, fowMark: "U").parse()
+            let board = FenParser(fenStr: fen, fowMark: "U").parse()
             return board
         }
             .receive(on: RunLoop.main)
@@ -137,25 +137,20 @@ class InGameViewModel: ObservableObject {
             promotingMove = nil
         }
 
-        do {
-            try server.applyMove(move: move)
+        Task {
+            await server.applyMove(move: move)
             if case .passNPlay = serverType {
                 isNextTurnEnabled = true
             }
-        } catch {
-            // Invalid move
-            return
         }
-
         // Valid move, update the current turn
         selectedPiece = nil
     }
 
     func promotePiece(toType: ChessPieceType) {
         guard let move = promotingMove else { return }
-
-        do {
-            try server.applyMove(
+        Task {
+            await server.applyMove(
                 move: Move(
                     piece: move.piece,
                     to: move.to,
@@ -167,11 +162,7 @@ class InGameViewModel: ObservableObject {
             if case .passNPlay = serverType {
                 isNextTurnEnabled = true
             }
-        } catch {
-            // Invalid move
-            return
         }
-
         // Valid move, update the current turn
     }
 

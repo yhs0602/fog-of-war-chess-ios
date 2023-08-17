@@ -40,6 +40,13 @@ struct WaitingRoomView: View {
                 }
             }
                 .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
+            NavigationLink(destination: InGameView(
+                color: .white,
+                shouldReset: false,
+                serverType: .remote
+            ), isActive: $navigationState.shouldNavigateToInGameView) {
+                EmptyView()
+            }
         }
             .onAppear {
             viewModel.prepareCreateRoom()

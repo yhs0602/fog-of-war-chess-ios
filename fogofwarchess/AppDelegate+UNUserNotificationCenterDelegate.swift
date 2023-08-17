@@ -48,6 +48,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         } else {
             print("the payload was not string")
         }
+        let navigationController = NavigationStateManager.shared // Assume a singleton instance or get it from the environment
+        navigationController.shouldNavigateToInGameView = true
 
         completionHandler()
     }

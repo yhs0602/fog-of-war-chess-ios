@@ -34,22 +34,16 @@ class SinglePlayChessServer: ChessServer {
     private var playerColor: ChessColor!
     private var computerColor: ChessColor!
 
-    func applyMove(move: Move) -> Future<Void, Error> {
-        return Future { [weak self] promise in
-            guard let self else {
-                return
-            }
-            let newState = BoardState.applyMove(board, move)
-            board = newState.0
-            let winner = newState.1
-            _fen.value = board.toFowFen(color: board.turn.opposite)
+    func applyMove(move: Move) async {
+        let newState = BoardState.applyMove(board, move)
+        board = newState.0
+        let winner = newState.1
+        _fen.value = board.toFowFen(color: board.turn.opposite)
 
-            if let winner = winner {
-                self._winner.value = winner
-            } else {
-                doComputerMove()
-            }
-            promise(.success(()))
+        if let winner = winner {
+            self._winner.value = winner
+        } else {
+            doComputerMove()
         }
     }
 
@@ -130,7 +124,7 @@ class SinglePlayChessServer: ChessServer {
 
                 for i in 1...7 {
                     if let pawn = newBoard.pieces[myKing.pos.offset(dr: i, df: 0)],
-                       pawn.type == .pawn {
+                        pawn.type == .pawn {
                         if pawn.color == computerColor {
                             numMyPawn += 1
                         } else {

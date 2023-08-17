@@ -22,10 +22,17 @@ struct EnterRoomView: View {
 //                navigateToRoom = true
             }.disabled(!viewModel.canJoinRoom)
             Spacer()
+            NavigationLink(destination: InGameView(
+                color: .white,
+                shouldReset: false,
+                serverType: .remote
+            ), isActive: $navigationState.shouldNavigateToInGameView) {
+                EmptyView()
+            }
         }.padding()
             .onAppear {
-                self.navigationState.currentView = .joinRoom
-            }
+            self.navigationState.currentView = .joinRoom
+        }
 //            .navigationDestination(isPresented: $navigateToRoom) {
 //                InGameView(color: .white, shouldReset: true, serverType: .remote)
 //            }

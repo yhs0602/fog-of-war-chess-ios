@@ -58,6 +58,7 @@
 		46C280882A83406600CE1DF5 /* chess_pieces_images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C280872A83406600CE1DF5 /* chess_pieces_images.xcassets */; };
 		46ECFEDA2A8DC13C00C0B262 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46ECFED92A8DC13C00C0B262 /* NotificationManager.swift */; };
 		46ECFEDC2A8DC4E600C0B262 /* NavgiationStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46ECFEDB2A8DC4E600C0B262 /* NavgiationStateManager.swift */; };
+		46ECFEDF2A8E100D00C0B262 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46ECFEDE2A8E100D00C0B262 /* CustomError.swift */; };
 		46F529602A8C54CA0035A2C8 /* CreateRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F5295F2A8C54CA0035A2C8 /* CreateRoomViewModel.swift */; };
 		46F529622A8C5B250035A2C8 /* AppDelegate+UNUserNotificationCenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F529612A8C5B250035A2C8 /* AppDelegate+UNUserNotificationCenterDelegate.swift */; };
 		46F529652A8C5FDC0035A2C8 /* UserDefaults+Flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F529642A8C5FDC0035A2C8 /* UserDefaults+Flow.swift */; };
@@ -116,6 +117,7 @@
 		46C280872A83406600CE1DF5 /* chess_pieces_images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = chess_pieces_images.xcassets; sourceTree = "<group>"; };
 		46ECFED92A8DC13C00C0B262 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		46ECFEDB2A8DC4E600C0B262 /* NavgiationStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavgiationStateManager.swift; sourceTree = "<group>"; };
+		46ECFEDE2A8E100D00C0B262 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		46F5295F2A8C54CA0035A2C8 /* CreateRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewModel.swift; sourceTree = "<group>"; };
 		46F529612A8C5B250035A2C8 /* AppDelegate+UNUserNotificationCenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+UNUserNotificationCenterDelegate.swift"; sourceTree = "<group>"; };
 		46F529632A8C5CA00035A2C8 /* fogofwarchess.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = fogofwarchess.entitlements; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				46F529682A8D11FC0035A2C8 /* network */,
 				464A53062A8B45F5003CAC89 /* server */,
 				464A53012A8B3404003CAC89 /* fowchess */,
+				46ECFEDD2A8E0FEA00C0B262 /* error */,
 				4631E3032A84C606008A32C2 /* AppDelegate.swift */,
 				4631E2EE2A84C323008A32C2 /* GoogleService-Info.plist */,
 				46C2805D2A821E1C00CE1DF5 /* AppView.swift */,
@@ -246,6 +249,14 @@
 				46C280562A82185100CE1DF5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		46ECFEDD2A8E0FEA00C0B262 /* error */ = {
+			isa = PBXGroup;
+			children = (
+				46ECFEDE2A8E100D00C0B262 /* CustomError.swift */,
+			);
+			path = error;
 			sourceTree = "<group>";
 		};
 		46F529682A8D11FC0035A2C8 /* network */ = {
@@ -363,6 +374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				464A530C2A8B4E32003CAC89 /* ServerType.swift in Sources */,
+				46ECFEDF2A8E100D00C0B262 /* CustomError.swift in Sources */,
 				4631E3042A84C606008A32C2 /* AppDelegate.swift in Sources */,
 				46C2806C2A83264200CE1DF5 /* ChessColor.swift in Sources */,
 				46C280602A82267D00CE1DF5 /* Piece.swift in Sources */,

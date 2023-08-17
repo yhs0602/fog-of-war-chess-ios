@@ -33,24 +33,17 @@ class PassNPlayChessServer: ChessServer {
         return _winner.eraseToAnyPublisher()
     }
 
-    func applyMove(move: Move) -> Future<Void, Error> {
-        return Future { [weak self] promise in
-            // submit the move to the server
-            // emit the updated fen, possible moves, etc.
-            guard let self else {
-                return
-            }
-            let newState = BoardState.applyMove(self.board, move)
-            self.board = newState.0
-            let winner = newState.1
-            self._fen.send(self.board.toFowFen(color: self.board.turn.opposite))
-            if let winner = winner {
-                self._winner.send(winner)
-                promise(.success(()))
-            } else {
-                // wait for the next turn signal, for simplicity sending success here
-                promise(.success(()))
-            }
+    func applyMove(move: Move) async {
+        // submit the move to the server
+        // emit the updated fen, possible moves, etc.
+        let newState = BoardState.applyMove(self.board, move)
+        self.board = newState.0
+        let winner = newState.1
+        self._fen.send(self.board.toFowFen(color: self.board.turn.opposite))
+        if let winner = winner {
+            self._winner.send(winner)
+        } else {
+            // wait for the next turn signal, for simplicity sending success here
         }
     }
 

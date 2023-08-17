@@ -7,6 +7,8 @@
 import SwiftUI
 
 struct AppView: View {
+    @EnvironmentObject var navigationState: NavigationStateManager
+
     var body: some View {
         NavigationView {
             VStack {
@@ -53,6 +55,13 @@ struct AppView: View {
                         .padding(6)
                         .overlay(RoundedRectangle(cornerRadius: 20)
                         .stroke(Color.accentColor, lineWidth: 4))
+                }
+                NavigationLink(destination: InGameView(
+                    color: .white,
+                    shouldReset: false,
+                    serverType: .remote
+                ), isActive: $navigationState.shouldNavigateToInGameView) {
+                    EmptyView()
                 }
             }
         }

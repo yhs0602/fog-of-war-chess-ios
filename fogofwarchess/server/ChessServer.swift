@@ -11,7 +11,7 @@ protocol ChessServer {
     // A function that mimics Kotlin's suspend function. In Swift, we might use a completion handler
     // or a Combine Publisher to achieve similar effects. Here, we use a Future as it represents a
     // single value that will be produced sometime in the future.
-    func applyMove(move: Move) -> Future<Void, Error>
+    func applyMove(move: Move) async
 
     func resetGame(playerColor: ChessColor)
 

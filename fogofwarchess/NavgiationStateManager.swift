@@ -20,6 +20,7 @@ class NavigationStateManager: ObservableObject {
     static let shared = NavigationStateManager()
 
     @Published var currentView: NavigationState = .main
+    @Published var shouldNavigateToInGameView: Bool = false
 
     private init() {
 
