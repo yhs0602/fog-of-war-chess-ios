@@ -35,10 +35,10 @@ struct InGameView: View {
             let squareSize = min(geometry.size.width, geometry.size.height) / 8
             VStack {
                 HStack(spacing: 0) {
-                    ForEach(0..<8 as Range<Int>) { file in
+                    ForEach(1..<9) { file in
                         VStack(spacing: 0) {
-                            ForEach(0..<8 as Range<Int>) { (rank) -> CellView in
-                                let coord = Coord(file: file + 1, rank: rank + 1)
+                            ForEach(1..<9) { (rank) -> CellView in
+                                let coord = Coord(file: file, rank: 9 - rank)
                                 CellView(
                                     squareSize: squareSize,
                                     coord: coord,
@@ -70,6 +70,7 @@ struct InGameView: View {
                 NavigationLink(destination: TurnCoverView(color: board.turn, shouldReset: false)) {
                     Text("Next Turn")
                 }
+                    .disabled(!viewModel.isNextTurnEnabled)
             }
         }.border(.black)
             .confirmationDialog("Select a color", isPresented: Binding<Bool>(
