@@ -134,9 +134,42 @@ class RemoteChessServer: ChessServer {
             }
             let promotingTo = ChessPieceType(rawValue: move.promotionPiece)
             // TODO: handle capture piece w en passant
+            let captureTarget: ChessPiece?
+            if let targetPiece = boardState.pieces[toCoord] {
+                // capture
+                captureTarget = targetPiece
+            } else if piece.type == .pawn && toCoord.file != fromCoord.file { // capture of pawn by en passant
+                let enPassantPos: Coord
+                if piece.color == .black {
+                    enPassantPos = toCoord.offset(dr: 1, df: 0)
+                } else {
+                    enPassantPos = toCoord.offset(dr: -1, df: 0)
+                }
+                if let enPassantTarget = boardState.pieces[enPassantPos], enPassantTarget.type == .pawn {
+                    captureTarget = enPassantTarget
+                } else {
+                    captureTarget = nil
+                }
+            } else {
+                captureTarget = nil
+            }
             // TODO: handle castling rook
-            let move = Move(piece: piece, to: toCoord, captureTarget: nil, castlingRook: nil, promotingTo: promotingTo)
-            validMoves[piece]?.append(move) // TODO: Default empty
+            let dfile = toCoord.file - fromCoord.file
+            let castlingRook: ChessPiece?
+            if piece.type == .king { // castling
+                if dfile == 2 { // O-O
+                    castlingRook = boardState.pieces[Coord(file: 8, rank: piece.rank)]
+                } else if dfile == -2 { // O-O-O
+                    castlingRook = boardState.pieces[Coord(file: 1, rank: piece.rank)]
+                } else {
+                    castlingRook = nil
+                }
+            } else {
+                castlingRook = nil
+            }
+
+            let move = Move(piece: piece, to: toCoord, captureTarget: captureTarget, castlingRook: castlingRook, promotingTo: promotingTo)
+            validMoves[piece, default: []].append(move)
         }
         return validMoves
     }
