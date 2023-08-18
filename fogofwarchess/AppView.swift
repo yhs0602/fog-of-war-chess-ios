@@ -10,7 +10,7 @@ struct AppView: View {
     @EnvironmentObject var navigationState: NavigationStateManager
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 Image(systemName: "apple.logo")
                     .imageScale(.large)
