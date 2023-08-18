@@ -21,7 +21,7 @@ struct Coord: Hashable {
     }
 
     var coordNumber: Character {
-        let number = 9 - rank
+        let number = rank
         return Character(String(number))
     }
 

@@ -53,6 +53,7 @@ class CreateRoomViewModel: ObservableObject {
         }
         RemoteChessServer.shared.resetGame(playerColor: .white)
         Task {
+            print("Creating room")
             let roomData = try await ChessServiceImpl.shared.createRoom(
                 data: CreateRoomData(
                     color: isWhite ? "white" : "black",

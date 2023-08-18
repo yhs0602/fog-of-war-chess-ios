@@ -12,7 +12,8 @@ class ChessServiceImpl: ChessService {
     private init() {
     }
 
-    let provider = MoyaProvider<ChessAPI>()
+//    let networkLogger =
+    let provider = MoyaProvider<ChessAPI>(plugins: [NetworkLoggerPlugin(configuration: .init(logOptions: .verbose))]) // plugins: [networkLogger]
 
     func joinRoom(data: JoinRoomData) async throws -> JoinedRoomInfo {
         let result = await provider.request(.joinRoom(data: data))
@@ -41,6 +42,7 @@ class ChessServiceImpl: ChessService {
     }
 
     func createRoom(data: CreateRoomData) async throws -> GeneratedRoomInfo {
+        print("Creating room with data color \(data.color) fcmtoken \(data.fcmToken)")
         let result = await provider.request(.createRoom(data: data))
         switch result {
         case .success(let response):

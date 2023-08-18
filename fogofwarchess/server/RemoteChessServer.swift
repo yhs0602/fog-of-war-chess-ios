@@ -32,10 +32,9 @@ class RemoteChessServer: ChessServer {
             moveResultBoardStatePublisher
         ).eraseToAnyPublisher()
         let compactJoinRoomResult = JoinRoomResultManager.shared.joinRoomResultBoardState
-            .print("Before tryCompactMap")
             .tryCompactMap {
             return $0
-        }.print("After tryCompactMap")
+        }
         return merged.merge(with: compactJoinRoomResult)
             .print("Sth came")
             .eraseToAnyPublisher()
@@ -43,7 +42,6 @@ class RemoteChessServer: ChessServer {
 
     private init() {
         let boardStateAndMoves = payloadToBoardStateData
-            .print("BoardStateAndMovesMap")
             .map { boardStateData -> BoardStateAndMoves in
             let boardState = FenParser(fenStr: boardStateData.board, fowMark: "U").parse()
             let color: ChessColor
@@ -55,7 +53,7 @@ class RemoteChessServer: ChessServer {
                 color = .white
             }
             return BoardStateAndMoves(boardState: boardState, legalMoves: boardStateData.legalMoves, color: color)
-        }.print("BoardStateAndMovesMap2")
+        }
             .replaceError(with: BoardStateAndMoves(boardState: BoardState.EmptyBoardState, legalMoves: [], color: .white))
             .share()
 
@@ -67,7 +65,6 @@ class RemoteChessServer: ChessServer {
             .map { boardStateAndMove in
             return boardStateAndMove.boardState
         }
-            .print("BoardStateAndMovesToFen sent")
             .sink { [weak self] boardState in
             guard let self else {
                 return
@@ -81,7 +78,6 @@ class RemoteChessServer: ChessServer {
             .map { boardStateData in
             return boardStateData.winner
         }.replaceError(with: nil)
-            .print("BoardStateAndMovesToWinner sent")
             .sink { [weak self] winner in
             if let winner {
                 let winnerColor = ChessColor(rawValue: winner)
@@ -96,7 +92,6 @@ class RemoteChessServer: ChessServer {
             .sink { [weak self] boardStateAndMoves in
             let localMoves = RemoteChessServer.boardStateAndMovesToLegalMoves(boardStateAndMoves: boardStateAndMoves)
             self?._possibleMoves.send(localMoves)
-            print("BoardStateAndMovesToPossibleMoves sent")
         }
             .store(in: &cancellables)
     }
