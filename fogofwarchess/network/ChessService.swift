@@ -9,6 +9,6 @@ import Foundation
 
 protocol ChessService {
     func createRoom(data: CreateRoomData) async throws -> GeneratedRoomInfo
-    func joinRoom(data: JoinRoomData) async throws -> GeneratedRoomInfo
+    func joinRoom(data: JoinRoomData) async throws -> JoinedRoomInfo
     func applyMove(data: MoveData, token: String) async throws -> BoardStateData
 }

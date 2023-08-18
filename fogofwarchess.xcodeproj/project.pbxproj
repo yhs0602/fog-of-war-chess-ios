@@ -56,6 +56,7 @@
 		46C280852A83403800CE1DF5 /* pdt.png in Resources */ = {isa = PBXBuildFile; fileRef = 46C280792A83403700CE1DF5 /* pdt.png */; };
 		46C280862A83403800CE1DF5 /* qlt.png in Resources */ = {isa = PBXBuildFile; fileRef = 46C2807A2A83403800CE1DF5 /* qlt.png */; };
 		46C280882A83406600CE1DF5 /* chess_pieces_images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C280872A83406600CE1DF5 /* chess_pieces_images.xcassets */; };
+		46C735162A8F0D1F00E366DD /* JoinRoomResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C735152A8F0D1F00E366DD /* JoinRoomResultManager.swift */; };
 		46ECFEDA2A8DC13C00C0B262 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46ECFED92A8DC13C00C0B262 /* NotificationManager.swift */; };
 		46ECFEDC2A8DC4E600C0B262 /* NavgiationStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46ECFEDB2A8DC4E600C0B262 /* NavgiationStateManager.swift */; };
 		46ECFEDF2A8E100D00C0B262 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46ECFEDE2A8E100D00C0B262 /* CustomError.swift */; };
@@ -115,6 +116,7 @@
 		46C280792A83403700CE1DF5 /* pdt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pdt.png; sourceTree = "<group>"; };
 		46C2807A2A83403800CE1DF5 /* qlt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qlt.png; sourceTree = "<group>"; };
 		46C280872A83406600CE1DF5 /* chess_pieces_images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = chess_pieces_images.xcassets; sourceTree = "<group>"; };
+		46C735152A8F0D1F00E366DD /* JoinRoomResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomResultManager.swift; sourceTree = "<group>"; };
 		46ECFED92A8DC13C00C0B262 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		46ECFEDB2A8DC4E600C0B262 /* NavgiationStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavgiationStateManager.swift; sourceTree = "<group>"; };
 		46ECFEDE2A8E100D00C0B262 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				46F529762A8D1C430035A2C8 /* ActivityViewController.swift */,
 				46ECFED92A8DC13C00C0B262 /* NotificationManager.swift */,
 				46ECFEDB2A8DC4E600C0B262 /* NavgiationStateManager.swift */,
+				46C735152A8F0D1F00E366DD /* JoinRoomResultManager.swift */,
 			);
 			path = fogofwarchess;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				46ECFEDC2A8DC4E600C0B262 /* NavgiationStateManager.swift in Sources */,
 				46C280522A82185000CE1DF5 /* InGameView.swift in Sources */,
 				46F529652A8C5FDC0035A2C8 /* UserDefaults+Flow.swift in Sources */,
+				46C735162A8F0D1F00E366DD /* JoinRoomResultManager.swift in Sources */,
 				464A52FC2A8B1AAD003CAC89 /* TurnCoverView.swift in Sources */,
 				4631E3062A84C987008A32C2 /* CreateRoomView.swift in Sources */,
 				464A53002A8B2F2D003CAC89 /* BoardState.swift in Sources */,

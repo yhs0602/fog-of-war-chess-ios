@@ -14,11 +14,11 @@ class ChessServiceImpl: ChessService {
 
     let provider = MoyaProvider<ChessAPI>()
 
-    func joinRoom(data: JoinRoomData) async throws -> GeneratedRoomInfo {
+    func joinRoom(data: JoinRoomData) async throws -> JoinedRoomInfo {
         let result = await provider.request(.joinRoom(data: data))
         switch result {
         case .success(let response):
-            let roomInfo = try JSONDecoder().decode(GeneratedRoomInfo.self, from: response.data)
+            let roomInfo = try JSONDecoder().decode(JoinedRoomInfo.self, from: response.data)
             print("Received room info: \(roomInfo)")
             return roomInfo
         case .failure(let error):

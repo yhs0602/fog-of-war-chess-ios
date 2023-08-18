@@ -22,15 +22,24 @@ class PassNPlayChessServer: ChessServer {
     var fen: AnyPublisher<String, Never> {
         return _fen.eraseToAnyPublisher()
     }
+    var currentFen: String {
+        return _fen.value
+    }
 
     private let _possibleMoves = CurrentValueSubject<[ChessPiece: [Move]], Never>([:])
     var possibleMoves: AnyPublisher<[ChessPiece: [Move]], Never> {
         return _possibleMoves.eraseToAnyPublisher()
     }
+    var currentPossibleMoves: [ChessPiece: [Move]] {
+        return _possibleMoves.value
+    }
 
     private let _winner = CurrentValueSubject<ChessColor?, Never>(nil)
     var winner: AnyPublisher<ChessColor?, Never> {
         return _winner.eraseToAnyPublisher()
+    }
+    var currentWinner: ChessColor? {
+        return _winner.value
     }
 
     func applyMove(move: Move) async {

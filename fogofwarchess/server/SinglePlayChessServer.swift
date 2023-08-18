@@ -31,6 +31,16 @@ class SinglePlayChessServer: ChessServer {
     var winner: AnyPublisher<ChessColor?, Never> {
         _winner.eraseToAnyPublisher()
     }
+    var currentFen: String {
+        return _fen.value
+    }
+    var currentPossibleMoves: [ChessPiece: [Move]] {
+        return _possibleMoves.value
+    }
+    var currentWinner: ChessColor? {
+        return _winner.value
+    }
+
     private var playerColor: ChessColor!
     private var computerColor: ChessColor!
 

@@ -25,8 +25,14 @@ class RemoteChessServer: ChessServer {
             return try decoder.decode(BoardStateData.self, from: data)
         }
 
-        return Publishers.Merge(notificationPayloads, moveResultBoardStatePublisher)
-            .eraseToAnyPublisher()
+        let merged = Publishers.Merge(
+            notificationPayloads,
+            moveResultBoardStatePublisher
+        )
+        if let joinRoomBoardState = JoinRoomResultManager.shared.joinRoomResultBoardState.value {
+            return merged.prepend(joinRoomBoardState).eraseToAnyPublisher()
+        }
+        return merged.eraseToAnyPublisher()
     }()
 
     private init() {
@@ -73,15 +79,24 @@ class RemoteChessServer: ChessServer {
     var fen: AnyPublisher<String, Never> {
         return _fen.eraseToAnyPublisher()
     }
+    var currentFen: String {
+        return _fen.value
+    }
 
     private let _possibleMoves = CurrentValueSubject<[ChessPiece: [Move]], Never>([:])
     var possibleMoves: AnyPublisher<[ChessPiece: [Move]], Never> {
         return _possibleMoves.eraseToAnyPublisher()
     }
+    var currentPossibleMoves: [ChessPiece: [Move]] {
+        return _possibleMoves.value
+    }
 
     private let _winner = CurrentValueSubject<ChessColor?, Never>(nil)
     var winner: AnyPublisher<ChessColor?, Never> {
         return _winner.eraseToAnyPublisher()
+    }
+    var currentWinner: ChessColor? {
+        return _winner.value
     }
 
     func applyMove(move: Move) async {

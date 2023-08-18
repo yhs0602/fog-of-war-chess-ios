@@ -52,11 +52,13 @@ class InGameViewModel: ObservableObject {
 
     func bindOutputs() {
         server.possibleMoves
+            .prepend(server.currentPossibleMoves)
             .receive(on: RunLoop.main)
             .assign(to: \.possibleMoves, on: self)
             .store(in: &disposables)
 
         server.fen
+            .prepend(server.currentFen)
             .map { fen in
             let board = FenParser(fenStr: fen, fowMark: "U").parse()
             return board
@@ -66,10 +68,10 @@ class InGameViewModel: ObservableObject {
             .store(in: &disposables)
 
         server.winner
+            .prepend(server.currentWinner)
             .receive(on: RunLoop.main)
             .assign(to: \.winner, on: self)
             .store(in: &disposables)
-
     }
 
     var selectedPossibleMoves: [Move] {
@@ -127,6 +129,11 @@ class InGameViewModel: ObservableObject {
             // Invalid move
             print("Invalid move")
             return
+        }
+        if move.captureTarget != nil {
+            dropAudioPlayer?.play()
+        } else {
+            placeAudioPlayer?.play()
         }
 
         if move.shouldPromote() {

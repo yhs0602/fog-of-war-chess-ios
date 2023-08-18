@@ -19,10 +19,13 @@ protocol ChessServer {
 
     // Combine's `Publisher` to notify changes, equivalent to Kotlin's `Flow`
     var fen: AnyPublisher<String, Never> { get }
+    var currentFen: String { get }
 
     // Combine's `Publisher` to notify changes, equivalent to Kotlin's `Flow`
     var possibleMoves: AnyPublisher<[ChessPiece: [Move]], Never> { get }
+    var currentPossibleMoves: [ChessPiece: [Move]] { get }
 
     // Combine's `Publisher` to notify changes, equivalent to Kotlin's `Flow`
     var winner: AnyPublisher<ChessColor?, Never> { get }
+    var currentWinner: ChessColor? { get }
 }

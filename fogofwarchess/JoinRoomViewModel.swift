@@ -65,7 +65,10 @@ class JoinRoomViewModel: ObservableObject {
                 print("Will save")
                 UserDefaults.standard.roomToken = roomData.token
                 print("Joined room: \(roomData.token)")
-                // TODO: Navigate to the game screen
+                let boardState = roomData.boardState
+                // Emit to the remote Server.
+                JoinRoomResultManager.shared.joinRoomResultBoardState.send(boardState)
+                // Navigate to the game screen
                 await MainActor.run {
                     let navigationManager = NavigationStateManager.shared
                     navigationManager.shouldNavigateToInGameView = true
