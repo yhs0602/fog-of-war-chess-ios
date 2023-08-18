@@ -16,7 +16,9 @@ class RemoteChessServer: ChessServer {
     private let moveResultBoardStatePublisher = PassthroughSubject<BoardStateData, Error>()
 
     private lazy var payloadToBoardStateData: AnyPublisher<BoardStateData, Error> = {
+        print("Lazy var created!")
         let notificationPayloads = NotificationManager.shared.payloadSubject
+            .compactMap { $0 }
             .tryMap { payload in
             guard let data = payload.data(using: .utf8) else {
                 throw NSError(domain: "Invalid payload", code: 0, userInfo: nil)
@@ -28,32 +30,58 @@ class RemoteChessServer: ChessServer {
         let merged = Publishers.Merge(
             notificationPayloads,
             moveResultBoardStatePublisher
-        )
-        if let joinRoomBoardState = JoinRoomResultManager.shared.joinRoomResultBoardState.value {
-            return merged.prepend(joinRoomBoardState).eraseToAnyPublisher()
-        }
-        return merged.eraseToAnyPublisher()
+        ).eraseToAnyPublisher()
+        let compactJoinRoomResult = JoinRoomResultManager.shared.joinRoomResultBoardState
+            .print("Before tryCompactMap")
+            .tryCompactMap {
+            return $0
+        }.print("After tryCompactMap")
+        return merged.merge(with: compactJoinRoomResult)
+            .print("Sth came")
+            .eraseToAnyPublisher()
     }()
 
     private init() {
         let boardStateAndMoves = payloadToBoardStateData
+            .print("BoardStateAndMovesMap")
             .map { boardStateData -> BoardStateAndMoves in
             let boardState = FenParser(fenStr: boardStateData.board, fowMark: "U").parse()
-            return BoardStateAndMoves(boardState: boardState, legalMoves: boardStateData.legalMoves)
-        } .replaceError(with: BoardStateAndMoves(boardState: BoardState.EmptyBoardState, legalMoves: []))
+            let color: ChessColor
+            if boardStateData.color == "white" {
+                color = .white
+            } else if boardStateData.color == "black" {
+                color = .black
+            } else {
+                color = .white
+            }
+            return BoardStateAndMoves(boardState: boardState, legalMoves: boardStateData.legalMoves, color: color)
+        }.print("BoardStateAndMovesMap2")
+            .replaceError(with: BoardStateAndMoves(boardState: BoardState.EmptyBoardState, legalMoves: [], color: .white))
             .share()
+
+        boardStateAndMoves.sink { [weak self] boardState in
+            self?.myColor = boardState.color
+        }.store(in: &cancellables)
 
         boardStateAndMoves
             .map { boardStateAndMove in
             return boardStateAndMove.boardState
-        }.sink { [weak self] boardState in
-            self?.board = boardState
-        }.store(in: &cancellables)
+        }
+            .print("BoardStateAndMovesToFen sent")
+            .sink { [weak self] boardState in
+            guard let self else {
+                return
+            }
+            self.board = boardState
+            self._fen.send(self.board.toFowFen(color: myColor))
+        }
+            .store(in: &cancellables)
 
         payloadToBoardStateData
             .map { boardStateData in
             return boardStateData.winner
         }.replaceError(with: nil)
+            .print("BoardStateAndMovesToWinner sent")
             .sink { [weak self] winner in
             if let winner {
                 let winnerColor = ChessColor(rawValue: winner)
@@ -68,11 +96,14 @@ class RemoteChessServer: ChessServer {
             .sink { [weak self] boardStateAndMoves in
             let localMoves = RemoteChessServer.boardStateAndMovesToLegalMoves(boardStateAndMoves: boardStateAndMoves)
             self?._possibleMoves.send(localMoves)
+            print("BoardStateAndMovesToPossibleMoves sent")
         }
             .store(in: &cancellables)
     }
 
     var board: BoardState = FenParser(fenStr: BoardState.DefaultFen, fowMark: "U").parse()
+
+    var myColor: ChessColor = .white
 
     // Equivalent of MutableStateFlow in Kotlin
     private let _fen = CurrentValueSubject<String, Never>(BoardState.DefaultFen)
@@ -123,15 +154,13 @@ class RemoteChessServer: ChessServer {
     }
 
     func resetGame(playerColor: ChessColor) {
-        // do nothing
-        //        board = FenParser(fenStr: BoardState.DefaultFen, fowMark: "U").parse()
-        //        _possibleMoves.send(board.getLegalMoves(color: board.turn))
-        //        _fen.send(board.toFowFen(color: board.turn))
-        //        _winner.send(nil)
+//        _possibleMoves.send(board.getLegalMoves(color: board.turn))
+//        _fen.send(board.toFowFen(color: board.turn))
+//        _winner.send(nil)
     }
 
     func onNextTurnStart() {
-        _fen.send(board.toFowFen(color: board.turn))
+        _fen.send(board.toFowFen(color: myColor))
         _possibleMoves.send(board.getLegalMoves(color: board.turn))
     }
 
@@ -149,7 +178,7 @@ class RemoteChessServer: ChessServer {
             guard let piece = boardState.pieces[fromCoord] else {
                 continue // wrong from position
             }
-            let promotingTo = ChessPieceType(rawValue: move.promotionPiece)
+            let promotingTo = ChessPieceType(rawValue: move.promotionPiece ?? "")
             let captureTarget: ChessPiece?
             if let targetPiece = boardState.pieces[toCoord] {
                 // capture

@@ -68,6 +68,7 @@ class JoinRoomViewModel: ObservableObject {
                 let boardState = roomData.boardState
                 // Emit to the remote Server.
                 JoinRoomResultManager.shared.joinRoomResultBoardState.send(boardState)
+                print("Sent joinRoomResultBoardState: \(boardState)")
                 // Navigate to the game screen
                 await MainActor.run {
                     let navigationManager = NavigationStateManager.shared

@@ -57,7 +57,6 @@ class PassNPlayChessServer: ChessServer {
     }
 
     func resetGame(playerColor: ChessColor) {
-        // do nothing
         board = FenParser(fenStr: BoardState.DefaultFen, fowMark: "U").parse()
         _possibleMoves.send(board.getLegalMoves(color: board.turn))
         _fen.send(board.toFowFen(color: board.turn))

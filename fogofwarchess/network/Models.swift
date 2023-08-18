@@ -40,13 +40,11 @@ struct GeneratedRoomInfo: Codable {
 struct JoinedRoomInfo: Codable {
     let roomId: String
     let token: String
-    let color: String
     let boardState: BoardStateData
 
     enum CodingKeys: String, CodingKey {
         case roomId = "room_id"
         case token
-        case color
         case boardState = "board_state"
     }
 }
@@ -54,7 +52,7 @@ struct JoinedRoomInfo: Codable {
 struct MoveData: Codable {
     let fromPosition: String
     let toPosition: String
-    let promotionPiece: String
+    let promotionPiece: String?
 
     enum CodingKeys: String, CodingKey {
         case fromPosition = "from_position"
@@ -69,6 +67,7 @@ struct BoardStateData: Codable {
     let status: String
     let winner: String?
     let fullMove: Int
+    let color: String
 
     enum CodingKeys: String, CodingKey {
         case board
@@ -76,10 +75,12 @@ struct BoardStateData: Codable {
         case status
         case winner
         case fullMove = "full_move"
+        case color
     }
 }
 
 struct BoardStateAndMoves {
     let boardState: BoardState
     let legalMoves: [MoveData]
+    let color: ChessColor
 }
