@@ -72,6 +72,7 @@ class JoinRoomViewModel: ObservableObject {
                 // Navigate to the game screen
                 await MainActor.run {
                     let navigationManager = NavigationStateManager.shared
+                    navigationManager.roomId = boardState.roomId
                     navigationManager.shouldNavigateToInGameView = true
                 }
             } catch {

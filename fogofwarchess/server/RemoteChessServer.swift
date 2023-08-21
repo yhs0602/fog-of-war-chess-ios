@@ -127,7 +127,7 @@ class RemoteChessServer: ChessServer {
         let moveData = MoveData(
             fromPosition: move.piece.pos.coordCode,
             toPosition: move.to.coordCode,
-            promotionPiece: move.promotingTo?.rawValue ?? ""
+            promotionPiece: move.promotingTo?.shortName.lowercased() ?? ""
         )
         do {
             let boardStateData = try await ChessServiceImpl.shared.applyMove(
@@ -167,7 +167,7 @@ class RemoteChessServer: ChessServer {
             guard let piece = boardState.pieces[fromCoord] else {
                 continue // wrong from position
             }
-            let promotingTo = ChessPieceType(rawValue: move.promotionPiece ?? "")
+            let promotingTo = ChessPieceType.fromShortName(move.promotionPiece?.uppercased().first)
             let captureTarget: ChessPiece?
             if let targetPiece = boardState.pieces[toCoord] {
                 // capture

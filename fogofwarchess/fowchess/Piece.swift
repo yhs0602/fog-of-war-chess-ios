@@ -54,7 +54,7 @@ enum ChessPieceType: String {
         }
     }
 
-    static func fromShortName(_ shortName: Character) -> ChessPieceType? {
+    static func fromShortName(_ shortName: Character?) -> ChessPieceType? {
         switch shortName {
         case "P": return .pawn
         case "R": return .rook

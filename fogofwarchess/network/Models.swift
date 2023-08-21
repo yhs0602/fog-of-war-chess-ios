@@ -52,7 +52,7 @@ struct JoinedRoomInfo: Codable {
 struct MoveData: Codable {
     let fromPosition: String
     let toPosition: String
-    let promotionPiece: String?
+    let promotionPiece: String? // Character
 
     enum CodingKeys: String, CodingKey {
         case fromPosition = "from_position"

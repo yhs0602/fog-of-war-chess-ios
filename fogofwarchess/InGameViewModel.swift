@@ -166,7 +166,9 @@ class InGameViewModel: ObservableObject {
                     promotingTo: toType
                 )
             )
-            promotingMove = nil
+            await MainActor.run {
+                promotingMove = nil
+            }
             if case .passNPlay = serverType {
                 isNextTurnEnabled = true
             }

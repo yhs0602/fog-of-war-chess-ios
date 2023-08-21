@@ -29,9 +29,7 @@ struct FenParser {
 
         let parsedEnPassant: Coord?
         if enPassant != "-" {
-            let file = enPassant.utf8.first! - UInt8(UnicodeScalar("a").value) + 1
-            let rank = Int(String(enPassant.utf8.last!))!
-            parsedEnPassant = Coord(file: Int(file), rank: rank)
+            parsedEnPassant = Coord(san: String(enPassant)) // file: Int(file), rank: rank
         } else {
             parsedEnPassant = nil
         }
