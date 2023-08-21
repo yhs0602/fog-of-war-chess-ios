@@ -17,12 +17,18 @@ extension UserDefaults {
             .eraseToAnyPublisher()
     }
 
+    var roomTokenPublisher: AnyPublisher<String?, Never> {
+        return self.publisher(for: \.roomToken)
+            .eraseToAnyPublisher()
+    }
+
     @objc dynamic var fcmToken: String? {
         get {
             return string(forKey: UserDefaults.fcmTokenKey)
         }
         set {
             set(newValue, forKey: UserDefaults.fcmTokenKey)
+            synchronize()
         }
     }
 
@@ -32,6 +38,7 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: UserDefaults.roomTokenKey)
+            synchronize()
         }
     }
 }

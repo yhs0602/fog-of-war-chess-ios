@@ -53,7 +53,7 @@ class JoinRoomViewModel: ObservableObject {
             print("Fcm token is nil")
             return
         }
-        RemoteChessServer.shared.resetGame(playerColor: .white) // Just instantiate the Remote Chess server
+//        self.remoteServer.resetGame(playerColor: .white) // Just instantiate the Remote Chess server
         Task {
             do {
                 let roomData = try await ChessServiceImpl.shared.joinRoom(

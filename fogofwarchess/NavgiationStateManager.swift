@@ -21,6 +21,7 @@ class NavigationStateManager: ObservableObject {
 
     @Published var currentView: NavigationState = .main
     @Published var shouldNavigateToInGameView: Bool = false
+    var roomId: String?
 
     private init() {
 

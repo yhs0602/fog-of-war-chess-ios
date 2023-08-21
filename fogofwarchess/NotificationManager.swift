@@ -13,5 +13,15 @@ class NotificationManager {
     static let shared = NotificationManager()
     private init() {}
 
-    let payloadSubject = CurrentValueSubject<String?, Never>(nil)
+    var fcmBoardStates: [String: CurrentValueSubject<BoardStateData?, Never>] = [:]
+
+    func getOrCreateSubject(for key: String) -> CurrentValueSubject<BoardStateData?, Never> {
+        if let subject = fcmBoardStates[key] {
+            return subject
+        } else {
+            let newSubject = CurrentValueSubject<BoardStateData?, Never>(nil)
+            fcmBoardStates[key] = newSubject
+            return newSubject
+        }
+    }
 }

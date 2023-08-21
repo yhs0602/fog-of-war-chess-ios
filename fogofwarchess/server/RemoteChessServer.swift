@@ -9,23 +9,16 @@ import Foundation
 import Combine
 
 class RemoteChessServer: ChessServer {
-    static let shared = RemoteChessServer()
     var cancellables = Set<AnyCancellable>()
     @Published private var roomToken: String? = UserDefaults.standard.roomToken
+    @Published var roomId: String
 
     private let moveResultBoardStatePublisher = PassthroughSubject<BoardStateData, Error>()
 
     private lazy var payloadToBoardStateData: AnyPublisher<BoardStateData, Error> = {
         print("Lazy var created!")
-        let notificationPayloads = NotificationManager.shared.payloadSubject
-            .compactMap { $0 }
-            .tryMap { payload in
-            guard let data = payload.data(using: .utf8) else {
-                throw NSError(domain: "Invalid payload", code: 0, userInfo: nil)
-            }
-            let decoder = JSONDecoder()
-            return try decoder.decode(BoardStateData.self, from: data)
-        }
+        let notificationPayloads = NotificationManager.shared.getOrCreateSubject(for: roomId)
+            .tryCompactMap { $0 }
 
         let merged = Publishers.Merge(
             notificationPayloads,
@@ -40,7 +33,8 @@ class RemoteChessServer: ChessServer {
             .eraseToAnyPublisher()
     }()
 
-    private init() {
+    init(roomId: String) {
+        self.roomId = roomId
         let boardStateAndMoves = payloadToBoardStateData
             .map { boardStateData -> BoardStateAndMoves in
             let boardState = FenParser(fenStr: boardStateData.board, fowMark: "U").parse()

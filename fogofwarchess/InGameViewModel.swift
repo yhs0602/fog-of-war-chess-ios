@@ -19,7 +19,7 @@ class InGameViewModel: ObservableObject {
     var placeAudioPlayer: AVAudioPlayer?
 
     let serverType: ServerType
-    var roomId: String?
+    @Published var roomId: String?
     private var server: ChessServer
 
     @Published var possibleMoves: [ChessPiece: [Move]] = [:]
@@ -28,6 +28,7 @@ class InGameViewModel: ObservableObject {
     @Published var promotingMove: Move?
     @Published private(set) var isNextTurnEnabled: Bool = false
     @Published var winner: ChessColor?
+
     private var disposables = Set<AnyCancellable>()
 
     init(
@@ -44,7 +45,7 @@ class InGameViewModel: ObservableObject {
         case .passNPlay:
             server = PassNPlayChessServer.shared
         case .remote:
-            server = RemoteChessServer.shared
+            server = RemoteChessServer(roomId: roomId!) // TODO: Error handling nil
         }
         bindOutputs()
         setupAudioPlayer()

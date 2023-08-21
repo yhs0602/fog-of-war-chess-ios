@@ -56,6 +56,7 @@ struct InGameView: View {
                 }.border(.black)
                 Text("Current turn: \(board.turn.rawValue)")
                 Text("Selected Piece: \(viewModel.selectedPiece?.description ?? "None")")
+                Text("Room ID: \(viewModel.roomId ?? "None")")
 //                if viewModel.gamePhase != .playing {
 //                    Text("History: \(viewModel.historyPgn)")
 //                    Button("Copy PGN") {

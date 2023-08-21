@@ -29,7 +29,8 @@ struct EnterRoomView: View {
             InGameView(
                 color: .white,
                 shouldReset: false,
-                serverType: .remote
+                serverType: .remote,
+                roomId: viewModel.roomId
             )
         }
 //            .navigationDestination(isPresented: $navigateToRoom) {

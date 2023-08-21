@@ -61,7 +61,8 @@ struct AppView: View {
             InGameView(
                 color: .white,
                 shouldReset: false,
-                serverType: .remote
+                serverType: .remote,
+                roomId: roomId
             )
         }
             .ignoresSafeArea()

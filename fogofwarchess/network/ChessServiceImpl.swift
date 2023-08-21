@@ -20,7 +20,7 @@ class ChessServiceImpl: ChessService {
         switch result {
         case .success(let response):
             let roomInfo = try JSONDecoder().decode(JoinedRoomInfo.self, from: response.data)
-            print("Received room info: \(roomInfo)")
+            print("Received joined room info: \(roomInfo)")
             return roomInfo
         case .failure(let error):
             print("Error calling the API: \(error)")
@@ -33,7 +33,7 @@ class ChessServiceImpl: ChessService {
         switch result {
         case .success(let response):
             let boardState = try JSONDecoder().decode(BoardStateData.self, from: response.data)
-            print("Received room info: \(boardState)")
+            print("Received board state: \(boardState)")
             return boardState
         case .failure(let error):
             print("Error calling the API: \(error)")

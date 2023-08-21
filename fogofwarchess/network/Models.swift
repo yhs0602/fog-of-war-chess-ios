@@ -68,6 +68,7 @@ struct BoardStateData: Codable {
     let winner: String?
     let fullMove: Int
     let color: String
+    let roomId: String
 
     enum CodingKeys: String, CodingKey {
         case board
@@ -76,6 +77,7 @@ struct BoardStateData: Codable {
         case winner
         case fullMove = "full_move"
         case color
+        case roomId = "room_id"
     }
 }
 

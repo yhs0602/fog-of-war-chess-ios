@@ -51,7 +51,7 @@ class CreateRoomViewModel: ObservableObject {
         guard let fcmToken = self.fcmToken else {
             return
         }
-        RemoteChessServer.shared.resetGame(playerColor: .white)
+//        self.remoteServer.resetGame(playerColor: .white)
         Task {
             print("Creating room")
             let roomData = try await ChessServiceImpl.shared.createRoom(
@@ -64,6 +64,8 @@ class CreateRoomViewModel: ObservableObject {
                 self.roomId = roomData.roomId
             }
             UserDefaults.standard.roomToken = roomData.token
+            UserDefaults.standard.synchronize()
+            print("Saved the room token \(roomData.token)")
         }
     }
 }
