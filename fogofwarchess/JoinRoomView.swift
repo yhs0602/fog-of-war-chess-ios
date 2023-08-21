@@ -30,7 +30,7 @@ struct EnterRoomView: View {
                 color: .white,
                 shouldReset: false,
                 serverType: .remote,
-                roomId: viewModel.roomId
+                roomId: NavigationStateManager.shared.roomId
             )
         }
 //            .navigationDestination(isPresented: $navigateToRoom) {

@@ -62,7 +62,7 @@ struct AppView: View {
                 color: .white,
                 shouldReset: false,
                 serverType: .remote,
-                roomId: roomId
+                roomId: NavigationStateManager.shared.roomId
             )
         }
             .ignoresSafeArea()

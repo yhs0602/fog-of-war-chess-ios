@@ -48,7 +48,8 @@ struct WaitingRoomView: View {
             InGameView(
                 color: .white,
                 shouldReset: false,
-                serverType: .remote
+                serverType: .remote,
+                roomId: NavigationStateManager.shared.roomId
             )
         }
     }
