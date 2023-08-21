@@ -57,6 +57,7 @@
 		46C280862A83403800CE1DF5 /* qlt.png in Resources */ = {isa = PBXBuildFile; fileRef = 46C2807A2A83403800CE1DF5 /* qlt.png */; };
 		46C280882A83406600CE1DF5 /* chess_pieces_images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C280872A83406600CE1DF5 /* chess_pieces_images.xcassets */; };
 		46C735162A8F0D1F00E366DD /* JoinRoomResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C735152A8F0D1F00E366DD /* JoinRoomResultManager.swift */; };
+		46C735192A93AA3F00E366DD /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = 46C735182A93AA3F00E366DD /* Gzip */; };
 		46ECFEDA2A8DC13C00C0B262 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46ECFED92A8DC13C00C0B262 /* NotificationManager.swift */; };
 		46ECFEDC2A8DC4E600C0B262 /* NavgiationStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46ECFEDB2A8DC4E600C0B262 /* NavgiationStateManager.swift */; };
 		46ECFEDF2A8E100D00C0B262 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46ECFEDE2A8E100D00C0B262 /* CustomError.swift */; };
@@ -142,6 +143,7 @@
 				4631E2FC2A84C422008A32C2 /* FirebaseDatabaseSwift in Frameworks */,
 				4631E2FA2A84C422008A32C2 /* FirebaseDatabase in Frameworks */,
 				4631E2FE2A84C422008A32C2 /* FirebaseMessaging in Frameworks */,
+				46C735192A93AA3F00E366DD /* Gzip in Frameworks */,
 				4631E3022A84C422008A32C2 /* FirebaseRemoteConfigSwift in Frameworks */,
 				4631E2F22A84C422008A32C2 /* FirebaseAnalyticsSwift in Frameworks */,
 				4631E2F82A84C422008A32C2 /* FirebaseCrashlytics in Frameworks */,
@@ -301,6 +303,7 @@
 				4631E2FF2A84C422008A32C2 /* FirebaseRemoteConfig */,
 				4631E3012A84C422008A32C2 /* FirebaseRemoteConfigSwift */,
 				46F529702A8D164E0035A2C8 /* Moya */,
+				46C735182A93AA3F00E366DD /* Gzip */,
 			);
 			productName = fogofwarchess;
 			productReference = 46C2804C2A82185000CE1DF5 /* fogofwarchess.app */;
@@ -333,6 +336,7 @@
 			packageReferences = (
 				4631E2F02A84C421008A32C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				46F5296F2A8D164E0035A2C8 /* XCRemoteSwiftPackageReference "Moya" */,
+				46C735172A93AA3F00E366DD /* XCRemoteSwiftPackageReference "GzipSwift" */,
 			);
 			productRefGroup = 46C2804D2A82185000CE1DF5 /* Products */;
 			projectDirPath = "";
@@ -625,6 +629,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		46C735172A93AA3F00E366DD /* XCRemoteSwiftPackageReference "GzipSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/1024jp/GzipSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		46F5296F2A8D164E0035A2C8 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya";
@@ -680,6 +692,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4631E2F02A84C421008A32C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfigSwift;
+		};
+		46C735182A93AA3F00E366DD /* Gzip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46C735172A93AA3F00E366DD /* XCRemoteSwiftPackageReference "GzipSwift" */;
+			productName = Gzip;
 		};
 		46F529702A8D164E0035A2C8 /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;

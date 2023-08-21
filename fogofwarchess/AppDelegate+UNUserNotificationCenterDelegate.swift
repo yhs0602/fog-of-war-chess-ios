@@ -7,6 +7,8 @@
 
 import Foundation
 import UserNotifications
+import Gzip
+
 extension AppDelegate: UNUserNotificationCenterDelegate {
     // Receive displayed notifications for iOS 10 devices.
     func userNotificationCenter(
@@ -23,7 +25,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             print("Background ")
             print(userInfo)
             if let payload = userInfo["payload"] as? String {
-                let decodedPayload = try? decodePayload(payload: payload)
+                let decodedPayload = decodeFCMPayload(encodedPayload: payload) // try? decodePayload(payload: payload)
                 if let decodedPayload {
                     NotificationManager.shared.getOrCreateSubject(for: decodedPayload.roomId).send(decodedPayload)
                 } else {
@@ -51,7 +53,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         print("Noti tapped ")
         print(userInfo)
         if let payload = userInfo["payload"] as? String {
-            let decodedPayload = try? decodePayload(payload: payload)
+            let decodedPayload = decodeFCMPayload(encodedPayload: payload) // try? decodePayload(payload: payload)
             if let decodedPayload {
                 NotificationManager.shared.getOrCreateSubject(for: decodedPayload.roomId).send(decodedPayload)
                 let navigationController = NavigationStateManager.shared // Assume a singleton instance or get it from the environment
@@ -72,5 +74,38 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
         let decoder = JSONDecoder()
         return try decoder.decode(BoardStateData.self, from: data)
+    }
+}
+
+func decodeFCMPayload(encodedPayload: String) -> BoardStateData? {
+    print("payload: \(encodedPayload)")
+
+    // 1. Decode Base64
+    guard let compressedData = Data(base64Encoded: encodedPayload) else {
+        print("Error: Failed to decode base64.")
+        return nil
+    }
+
+    // 2. Decompress GZIP
+    var decompressedData: Data
+    do {
+        if compressedData.isGzipped {
+            decompressedData = try compressedData.gunzipped()
+        } else {
+            decompressedData = compressedData
+        }
+    } catch {
+        print("Error: Failed to decompress data.")
+        return nil
+    }
+
+    // 3. Decode Json
+    let decoder = JSONDecoder()
+    do {
+        let boardState = try decoder.decode(BoardStateData.self, from: decompressedData)
+        return boardState
+    } catch {
+        print("Error decoding JSON: \(error)")
+        return nil
     }
 }
